@@ -12,7 +12,12 @@ public class CannonFiring : MonoBehaviour
     [SerializeField] private  float shootDelay;
     private Vector3 destination;
     private bool canShoot;
-    
+
+    public bool CanShoot
+    {
+        get{return canShoot;}
+        set{canShoot = value;}
+    }
 
     // Start is called before the first frame update
     void Start()

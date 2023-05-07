@@ -6,6 +6,7 @@ using TMPro;
 public class ScoreManager : MonoBehaviour
 {
     [HideInInspector] public TextMeshProUGUI scoreText; 
+    [SerializeField] private TextMeshProUGUI gameOverScoreText; 
     [HideInInspector] public float score; // moles clicked
 
     // Start is called before the first frame update
@@ -25,6 +26,7 @@ public class ScoreManager : MonoBehaviour
     {
         score++;
         scoreText.SetText("<sprite=0> " + score.ToString());
+        gameOverScoreText.SetText("You Whacked " + score.ToString() + " Moles!");
     }
 
     public void resetScore()

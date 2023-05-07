@@ -30,6 +30,11 @@ public class Mole : Interactable
         StartCoroutine(change());
     }
 
+    void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
     public override void interact()
     {
         GameObject whackObj = Instantiate(whackParticle, transform.position, Quaternion.identity);

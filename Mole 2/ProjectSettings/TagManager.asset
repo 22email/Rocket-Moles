@@ -9,6 +9,7 @@ TagManager:
   - MoleManager
   - ScoreManager
   - MoleIndicator
+  - Gun
   layers:
   - Default
   - TransparentFX

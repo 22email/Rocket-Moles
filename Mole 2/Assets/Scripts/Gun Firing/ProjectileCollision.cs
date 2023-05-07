@@ -11,7 +11,7 @@ public class ProjectileCollision : MonoBehaviour
 
    void OnCollisionEnter(Collision co) 
    {
-        if(co.gameObject.tag != "Bullet" && co.gameObject.tag != "Player" && !collided)
+        if(co.gameObject.tag != "Bullet" && co.gameObject.tag != "Player" && co.gameObject.tag != "Gun" && !collided)
         {
             GameObject explosionObj = Instantiate(explosion, co.contacts[0].point, Quaternion.identity);
             collided = true; 

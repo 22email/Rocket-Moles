@@ -17,12 +17,13 @@ public class MoleManager : MonoBehaviour
         }
 
         genRandMole();
-
     }
 
     void Awake()
     {
         molesArray = FindObjectsOfType<Mole>(); 
+
+        lastMole = 1;
     }
 
     // Update is called once per frame
@@ -43,6 +44,12 @@ public class MoleManager : MonoBehaviour
         molesArray[moleNum].gameObject.SetActive(true);
 
         lastMole = moleNum;
+    }
+
+    public void cleanBoard()
+    {
+        molesArray[lastMole].gameObject.SetActive(false);
+        genRandMole();
     } 
 
 }

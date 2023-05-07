@@ -47,6 +47,8 @@ public class TimeBar : MonoBehaviour
 
     public IEnumerator showGameOverScreen()
     {
+        stopGameEvent.Invoke();
+
         for(float t = 0.0f; t < 1f; t += Time.deltaTime / 0.5f)
         {
             gameOverGroup.alpha = Mathf.Lerp(0, 1, t);
@@ -62,6 +64,6 @@ public class TimeBar : MonoBehaviour
         playButton.interactable = true;
         Time.timeScale = 0f;
         StopAllCoroutines();
-        stopGameEvent.Invoke();
+        
     }
 }

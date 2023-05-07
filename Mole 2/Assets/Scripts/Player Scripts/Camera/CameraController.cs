@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public Vector2 mouseSens;
+    [SerializeField] private float mouseSens;
 
     public Transform player;  
 
@@ -25,8 +25,8 @@ public class CameraController : MonoBehaviour
     {
         if (canMoveMouse)
         {
-            float mouseX = Input.GetAxisRaw("Mouse X") * mouseSens.x * 0.02f;
-            float mouseY = Input.GetAxisRaw("Mouse Y") * mouseSens.y * 0.02f;
+            float mouseX = Input.GetAxisRaw("Mouse X") * mouseSens * 0.02f;
+            float mouseY = Input.GetAxisRaw("Mouse Y") * mouseSens * 0.02f;
 
             camX -= mouseY;
             camY += mouseX;

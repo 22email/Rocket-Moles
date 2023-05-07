@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour
 {
-    public float maxDistance; // Max distance from where you can look at mole
-    public KeyCode interactKey;
-    public LayerMask mask;
+    [SerializeField] private float maxDistance; // Max distance from where you can look at mole
+    [SerializeField] private KeyCode interactKey;
+    [SerializeField] private LayerMask mask;
     [SerializeField] private Camera cam;
     private PlayerUI playerUI; 
 
@@ -32,7 +32,7 @@ public class PlayerInteract : MonoBehaviour
             {
                 Interactable interactable = hit.collider.gameObject.GetComponent<Interactable>();
 
-                playerUI.updateText(interactable.promptMessage);
+                playerUI.updateText(interactable.promptMessage);    
 
                 if(Input.GetKeyDown(interactKey))
                 {
