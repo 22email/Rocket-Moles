@@ -8,6 +8,7 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] private KeyCode interactKey;
     [SerializeField] private LayerMask mask;
     [SerializeField] private Camera cam;
+    [SerializeField] private Animator hammerAnimator;
     private PlayerUI playerUI; 
 
     // Start is called before the first frame update
@@ -37,6 +38,7 @@ public class PlayerInteract : MonoBehaviour
                 if(Input.GetKeyDown(interactKey))
                 {
                     interactable.baseInteract();
+                    hammerAnimator.Play("HammerSwing", 0);
                 }
             }
         }

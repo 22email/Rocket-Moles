@@ -49,7 +49,7 @@ public class TimeBar : MonoBehaviour
     {
         stopGameEvent.Invoke();
 
-        for(float t = 0.0f; t < 1f; t += Time.deltaTime / 0.5f)
+        for(float t = 0.0f; t < 1f; t += Time.deltaTime / 0.8f)
         {
             gameOverGroup.alpha = Mathf.Lerp(0, 1, t);
             yield return null;
