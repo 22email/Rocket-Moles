@@ -6,7 +6,7 @@ using TMPro;
 public class ScoreManager : MonoBehaviour
 {
     [HideInInspector] public TextMeshProUGUI scoreText; 
-    [SerializeField] private TextMeshProUGUI gameOverScoreText; 
+    public TextMeshProUGUI gameOverScoreText; 
     [HideInInspector] public float score; // moles clicked
 
     // Start is called before the first frame update

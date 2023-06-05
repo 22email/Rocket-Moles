@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class TimeBar : MonoBehaviour
 {
     [SerializeField] private float gameTime;
-    [SerializeField] private GameObject bar;
-    [SerializeField] private CanvasGroup gameOverGroup;
-    [SerializeField] private Button playButton;
+    public GameObject bar;
+    public CanvasGroup gameOverGroup;
+    public Button playButton;
     private RectTransform barRectTransform;
     public UnityEvent stopGameEvent;
     

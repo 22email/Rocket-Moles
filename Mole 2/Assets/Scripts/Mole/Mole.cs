@@ -6,8 +6,8 @@ using UnityEngine.Events;
 
 public class Mole : Interactable
 {
-    [SerializeField] private GameObject whackParticle;
-    [SerializeField] private ParticleSystem byeSpeechBubble;
+    public GameObject whackParticle;
+    public ParticleSystem byeSpeechBubble;
     public UnityEvent onWhack;
     private MoleManager moleManager;
 

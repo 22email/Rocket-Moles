@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour
 {
-    [SerializeField] private GameObject gameOverMenu;
-    [SerializeField] private CanvasGroup canvasGroup;
-    [SerializeField] private Button playButton;
+    public GameObject gameOverMenu;
+    public CanvasGroup canvasGroup;
+    public Button playButton;
     public UnityEvent onPlayAgain;
     public void playAgainButton()
     {
