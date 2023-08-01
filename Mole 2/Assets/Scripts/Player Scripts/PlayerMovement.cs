@@ -1,3 +1,5 @@
+// This and other movement-related scripts from https://youtu.be/f473C43s8nE 
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float airMultiplier;
     [SerializeField] private float jumpCooldown;
 
-    // jumping
+    [Header("Jumping")]
     [SerializeField] private float jumpForce;
     private bool wishJump;
     private bool canJump;
@@ -36,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 moveDirection;
 
-    private static Rigidbody rb;
+    private Rigidbody rb;
 
     private void Start()
     {

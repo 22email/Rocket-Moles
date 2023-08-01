@@ -1,4 +1,5 @@
-// https://www.youtube.com/watch?v=W0AZ-owxCog
+// From https://www.youtube.com/watch?v=W0AZ-owxCog
+// Might change to animations later
 
 using System.Collections;
 using System.Collections.Generic;
