@@ -14,9 +14,8 @@ public class Mole : Interactable
     // Start is called before the first frame update
     void Start()
     {
-        onWhack.AddListener(GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>().updateScore);
+        onWhack.AddListener(GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>().UpdateScore);
         moleManager = GameObject.FindGameObjectWithTag("MoleManager").GetComponent<MoleManager>();
-
     }
 
     // Update is called once per frame
@@ -42,7 +41,7 @@ public class Mole : Interactable
 
         Destroy(whackObj, 2f);
 
-        moleManager.genRandMole();
+        moleManager.GenRandMole();
         onWhack.Invoke();
     }
 
@@ -50,7 +49,7 @@ public class Mole : Interactable
     {
         yield return new WaitForSeconds(5);
         gameObject.SetActive(false);
-        moleManager.genRandMole();
+        moleManager.GenRandMole();
         byeSpeechBubble.Play();
     }
 }

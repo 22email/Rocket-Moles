@@ -22,7 +22,7 @@ public class ScoreManager : MonoBehaviour
         
     }
 
-    public void updateScore()
+    public void UpdateScore()
     {
         score++;
         scoreText.SetText("<sprite=0> " + score.ToString());

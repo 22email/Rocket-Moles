@@ -1,48 +1,71 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
+    public UnityEvent onPause;
+    public UnityEvent onResume;
     public GameObject pauseMenu;
-    private CameraController cameraController;
     private bool isPaused = false;
+
+    private bool canPause = true;
+    public bool CanPause 
+    {
+        get { return canPause; }
+        set { canPause = value; }
+    }
+
+    private Button[] childButtons;
 
     // Start is called before the first frame update
     void Start()
     {
-        cameraController = Camera.main.GetComponent<CameraController>();
+        childButtons = pauseMenu.GetComponentsInChildren<Button>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape) && canPause)
         {
-            if(!isPaused) pause();
+            if(!isPaused) Pause();
 
-            else unPause();
+            else Resume();
         }
     }
 
-    public void pause()
+    public void Pause()
     {
         Time.timeScale = 0f;
-        pauseMenu.SetActive(true);
+        onPause.Invoke();
+
         isPaused = true;
-        cameraController.canMoveMouse = false;
         Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true; 
+        Cursor.visible = true;
+
+        foreach(Button b in childButtons) 
+        {
+            b.interactable = true;
+        } 
 
     }
 
-    public void unPause()
+    public void Resume()
     {
         Time.timeScale = 1f;
+        onResume.Invoke();
+
         pauseMenu.SetActive(false);
         isPaused = false;
-        cameraController.canMoveMouse = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false; 
+
+        foreach(Button b in childButtons) 
+        {
+            b.interactable = false;
+        }
     }
 }

@@ -23,7 +23,13 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Ground Check")]
     [SerializeField] private LayerMask whatIsGround;
+
     private bool grounded;
+    public bool Grounded
+    {
+        get { return grounded; }
+        set { grounded = value; }
+    }
 
     [Header("Slopes")]
     [SerializeField] private float maxSlope;
@@ -53,11 +59,11 @@ public class PlayerMovement : MonoBehaviour
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
 
-        getInput();
+        GetInput();
         SpeedControl();
 
         // handle drag
-        if (grounded) 
+        if (grounded)
             rb.drag = groundDrag;
 
         else if (onSlope())
@@ -65,25 +71,25 @@ public class PlayerMovement : MonoBehaviour
 
         else
             rb.drag = 0f;
-        
+
         if (transform.position.y <= lowestPoint)
         {
-            resetPosition();
+            ResetPosition();
         }
     }
 
-    public void resetPosition()
+    public void ResetPosition()
     {
-        rb.velocity = Vector3.zero;
         transform.position = new Vector3(0, 2, 0);
+        rb.velocity = Vector3.zero;
     }
 
     private void FixedUpdate()
     {
-        movePlayer();
+        MovePlayer();
     }
 
-    private void getInput()
+    private void GetInput()
     {
         // Gets input for x and z axis
         xInput = Input.GetAxisRaw("Horizontal");
@@ -91,13 +97,13 @@ public class PlayerMovement : MonoBehaviour
 
         // jump buffering
         // Buffers the jump when jump key is held down
-        if(Input.GetKeyDown(jumpKey) && !wishJump)
+        if (Input.GetKeyDown(jumpKey) && !wishJump)
             wishJump = true;
-        if(Input.GetKeyUp(jumpKey))
-            wishJump = false;   
+        if (Input.GetKeyUp(jumpKey))
+            wishJump = false;
 
         // when to jump
-        if(wishJump && grounded && canJump)
+        if (wishJump && grounded && canJump)
         {
             Jump();
             wishJump = false;
@@ -105,30 +111,30 @@ public class PlayerMovement : MonoBehaviour
 
             // Immediately resets the jump boolean
             // Mostly for slope handling
-            Invoke(nameof(resetJumpCooldown), jumpCooldown);
+            Invoke(nameof(ResetJumpCooldown), jumpCooldown);
 
         }
     }
 
-    private void movePlayer()
+    private void MovePlayer()
     {
         // calculate movement direction
         moveDirection = orientation.forward * zInput + orientation.right * xInput;
 
-        if(onSlope() && canJump)
+        if (onSlope() && canJump)
         {
             rb.AddForce(getSlopeDir() * moveSpeed * 20f, ForceMode.Acceleration);
-            
-            if(rb.velocity.y > 0)
+
+            if (rb.velocity.y > 0)
                 rb.velocity = new Vector3(rb.velocity.x, -2f, rb.velocity.z);
         }
 
         // on ground
-        else if(grounded)
+        else if (grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Acceleration);
 
         // in air
-        else if(!grounded)
+        else if (!grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Acceleration);
 
         rb.useGravity = !onSlope();
@@ -138,26 +144,26 @@ public class PlayerMovement : MonoBehaviour
     private void SpeedControl()
     {
 
-        if(onSlope() && canJump)
+        if (onSlope() && canJump)
         {
-            if(rb.velocity.magnitude > moveSpeed)
+            if (rb.velocity.magnitude > moveSpeed)
             {
                 rb.velocity = rb.velocity.normalized * moveSpeed;
             }
         }
 
-        else 
+        else
         {
             Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
             // limit velocity if needed
-            if(flatVel.magnitude > moveSpeed)
+            if (flatVel.magnitude > moveSpeed)
             {
-            Vector3 limitedVel = flatVel.normalized * moveSpeed;
-            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+                Vector3 limitedVel = flatVel.normalized * moveSpeed;
+                rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
             }
         }
-        
+
     }
 
     // Jump
@@ -166,25 +172,25 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
     }
 
-    private void resetJumpCooldown()
+    private void ResetJumpCooldown()
     {
         canJump = true;
     }
 
     private bool onSlope()
     {
-        if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle < maxSlope && angle != 0;
         }
 
-        return false; 
+        return false;
     }
 
     private Vector3 getSlopeDir()
     {
-        return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized; 
+        return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
 
 }

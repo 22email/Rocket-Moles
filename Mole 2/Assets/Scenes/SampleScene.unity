@@ -438,7 +438,7 @@ GameObject:
   - component: {fileID: 148929296}
   - component: {fileID: 148929293}
   - component: {fileID: 148929294}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -457,11 +457,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 304608788}
   - {fileID: 584559179}
   - {fileID: 603094844}
-  - {fileID: 258826085}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &148929292
 MonoBehaviour:
@@ -1082,37 +1082,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   molesArray: []
---- !u!1 &258826084
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 258826085}
-  m_Layer: 2
-  m_Name: CameraPos
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &258826085
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 258826084}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 148929291}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &294688624
 GameObject:
   m_ObjectHideFlags: 0
@@ -1274,27 +1243,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 304608788}
-  - component: {fileID: 304608787}
+  - component: {fileID: 304608789}
   m_Layer: 0
-  m_Name: Camera
+  m_Name: Camera Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &304608787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 304608786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e05495f1184584c48a0abdb018737053, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  camPos: {fileID: 258826085}
 --- !u!4 &304608788
 Transform:
   m_ObjectHideFlags: 0
@@ -1303,14 +1259,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304608786}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 330585546}
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 148929291}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &304608789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304608786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fa53f645045e3643bf3e6982521409f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseSens: 100
+  player: {fileID: 603094844}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1321,9 +1291,9 @@ GameObject:
   m_Component:
   - component: {fileID: 330585546}
   - component: {fileID: 330585545}
-  - component: {fileID: 330585548}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
+  - component: {fileID: 330585548}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1461,12 +1431,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 330585543}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fa53f645045e3643bf3e6982521409f, type: 3}
+  m_Script: {fileID: 11500000, guid: f85286c415b683d4eba1a3b1f65b989a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSens: 100
-  player: {fileID: 603094844}
-  canMoveMouse: 0
+  cameraBobHeight: 0.009
+  cameraBobFrequency: 8
+  weaponBobHeight: 0.002
+  weaponBobFrequency: 12
+  cameraHolder: {fileID: 304608788}
+  player: {fileID: 148929291}
+  weaponsHolder: {fileID: 1481359580}
 --- !u!1 &352396446
 GameObject:
   m_ObjectHideFlags: 0
@@ -1548,6 +1522,194 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 352396446}
   m_CullTransparentMesh: 1
+--- !u!1 &373071462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 373071463}
+  - component: {fileID: 373071464}
+  m_Layer: 5
+  m_Name: UI Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &373071463
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373071462}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1339478061}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &373071464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373071462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 994976be1bcd72146bd87541aee6ff55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPause:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 352396446}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 304608789}
+        m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+        m_MethodName: set_CanMoveMouse
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 148929295}
+        m_TargetAssemblyTypeName: PlayerInteract, Assembly-CSharp
+        m_MethodName: set_CanInteract
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 330585548}
+        m_TargetAssemblyTypeName: CameraBobbing, Assembly-CSharp
+        m_MethodName: set_CanBob
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3469287838450019949}
+        m_TargetAssemblyTypeName: CannonFiring, Assembly-CSharp
+        m_MethodName: set_CanShoot
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onResume:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 352396446}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 304608789}
+        m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+        m_MethodName: set_CanMoveMouse
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 148929295}
+        m_TargetAssemblyTypeName: PlayerInteract, Assembly-CSharp
+        m_MethodName: set_CanInteract
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 330585548}
+        m_TargetAssemblyTypeName: CameraBobbing, Assembly-CSharp
+        m_MethodName: set_CanBob
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 330585548}
+        m_TargetAssemblyTypeName: CameraBobbing, Assembly-CSharp
+        m_MethodName: set_CanBob
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 3469287838450019949}
+        m_TargetAssemblyTypeName: CannonFiring, Assembly-CSharp
+        m_MethodName: set_CanShoot
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  pauseMenu: {fileID: 352396446}
 --- !u!1 &375216674
 GameObject:
   m_ObjectHideFlags: 0
@@ -1912,7 +2074,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &410087042
 MonoBehaviour:
@@ -1947,7 +2109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 418179888}
   m_Layer: 5
-  m_Name: 'Actual UI '
+  m_Name: Game UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2166,7 +2328,7 @@ RectTransform:
   m_Children:
   - {fileID: 1749147398}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2358,7 +2520,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &584559178
 GameObject:
@@ -2371,7 +2533,7 @@ GameObject:
   - component: {fileID: 584559179}
   - component: {fileID: 584559182}
   - component: {fileID: 584559181}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2634,7 +2796,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 780576749}
         m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
-        m_MethodName: playAgainButton
+        m_MethodName: PlayAgainButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3200,7 +3362,7 @@ MonoBehaviour:
   onPlayAgain:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 330585548}
+      - m_Target: {fileID: 304608789}
         m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
         m_MethodName: startMouseMovement
         m_Mode: 1
@@ -3238,7 +3400,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 148929292}
         m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: resetPosition
+        m_MethodName: ResetPosition
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3250,7 +3412,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 257430993}
         m_TargetAssemblyTypeName: MoleManager, Assembly-CSharp
-        m_MethodName: cleanBoard
+        m_MethodName: CleanBoard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3259,6 +3421,54 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 148929295}
+        m_TargetAssemblyTypeName: PlayerInteract, Assembly-CSharp
+        m_MethodName: set_CanInteract
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 373071464}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: set_CanPause
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 330585548}
+        m_TargetAssemblyTypeName: CameraBobbing, Assembly-CSharp
+        m_MethodName: set_CanBob
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 3469287838450019949}
+        m_TargetAssemblyTypeName: CannonFiring, Assembly-CSharp
+        m_MethodName: set_CanShoot
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &783391999
 GameObject:
@@ -3293,7 +3503,7 @@ Transform:
   - {fileID: 254421193}
   - {fileID: 1471227509}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &832575517
 GameObject:
@@ -3480,43 +3690,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 904693961}
   m_CullTransparentMesh: 1
---- !u!198 &911300227 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 216563320533791615, guid: 809efd1db5f87954ba9773dbdcd76575,
-    type: 3}
-  m_PrefabInstance: {fileID: 989430653}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &925948440
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 925948441}
-  m_Layer: 7
-  m_Name: Shoot Point
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &925948441
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 925948440}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.002272, z: 0.000972}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 543450652453003721}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &953090324
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3737,84 +3910,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 964546640}
   m_CullTransparentMesh: 1
---- !u!1001 &989430653
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 543450652453003721}
-    m_Modifications:
-    - target: {fileID: 216563320533791601, guid: 809efd1db5f87954ba9773dbdcd76575,
-        type: 3}
-      propertyPath: m_Name
-      value: MuzzleFlash
-      objectReference: {fileID: 0}
-    - target: {fileID: 216563320533791614, guid: 809efd1db5f87954ba9773dbdcd76575,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 216563320533791614, guid: 809efd1db5f87954ba9773dbdcd76575,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 216563320533791614, guid: 809efd1db5f87954ba9773dbdcd76575,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.00241
-      objectReference: {fileID: 0}
-    - target: {fileID: 216563320533791614, guid: 809efd1db5f87954ba9773dbdcd76575,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.00099
-      objectReference: {fileID: 0}
-    - target: {fileID: 216563320533791614, guid: 809efd1db5f87954ba9773dbdcd76575,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 216563320533791614, guid: 809efd1db5f87954ba9773dbdcd76575,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 216563320533791614, guid: 809efd1db5f87954ba9773dbdcd76575,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 216563320533791614, guid: 809efd1db5f87954ba9773dbdcd76575,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 216563320533791614, guid: 809efd1db5f87954ba9773dbdcd76575,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 216563320533791614, guid: 809efd1db5f87954ba9773dbdcd76575,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 216563320533791614, guid: 809efd1db5f87954ba9773dbdcd76575,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 216563320533791615, guid: 809efd1db5f87954ba9773dbdcd76575,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 809efd1db5f87954ba9773dbdcd76575, type: 3}
 --- !u!1 &1018356795 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 34d9b77d280549e449cd5a26c8f65994,
@@ -3878,7 +3973,7 @@ Transform:
   m_Children:
   - {fileID: 1913257539}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1250933204
 GameObject:
@@ -3978,10 +4073,70 @@ MonoBehaviour:
   stopGameEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 330585548}
+      - m_Target: {fileID: 304608789}
         m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
         m_MethodName: stopMouseMovement
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 148929295}
+        m_TargetAssemblyTypeName: PlayerInteract, Assembly-CSharp
+        m_MethodName: set_CanInteract
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 148929295}
+        m_TargetAssemblyTypeName: PlayerInteract, Assembly-CSharp
+        m_MethodName: set_CanInteract
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 373071464}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: set_CanPause
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 330585548}
+        m_TargetAssemblyTypeName: CameraBobbing, Assembly-CSharp
+        m_MethodName: set_CanBob
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3469287838450019949}
+        m_TargetAssemblyTypeName: CannonFiring, Assembly-CSharp
+        m_MethodName: set_CanShoot
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4141,7 +4296,6 @@ GameObject:
   - component: {fileID: 1339478060}
   - component: {fileID: 1339478059}
   - component: {fileID: 1339478058}
-  - component: {fileID: 1339478062}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -4224,6 +4378,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 373071463}
   - {fileID: 1687903810}
   - {fileID: 418179888}
   - {fileID: 780576745}
@@ -4236,19 +4391,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1339478062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1339478057}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 994976be1bcd72146bd87541aee6ff55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 352396446}
 --- !u!1 &1384038567
 GameObject:
   m_ObjectHideFlags: 0
@@ -4466,7 +4608,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1339478062}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: unPause
         m_Mode: 1
@@ -4552,7 +4694,7 @@ Transform:
   - {fileID: 1251145534}
   - {fileID: 1599068403}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1471227509 stripped
 Transform:
@@ -4741,12 +4883,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   multiplier: 4
   smooth: 2
---- !u!4 &1530949148 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 216563320533791614, guid: 809efd1db5f87954ba9773dbdcd76575,
-    type: 3}
-  m_PrefabInstance: {fileID: 989430653}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1592784072
 GameObject:
   m_ObjectHideFlags: 0
@@ -5166,7 +5302,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 34d9b77d280549e449cd5a26c8f65994,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.58
+      value: -0.64
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 34d9b77d280549e449cd5a26c8f65994,
         type: 3}
@@ -5917,9 +6053,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1339478062}
+      - m_Target: {fileID: 373071464}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: unPause
+        m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6109,7 +6245,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28000
+  m_Name: pb_Mesh28098
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -7135,7 +7271,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2020581241
 GameObject:
@@ -7215,54 +7351,23 @@ CanvasRenderer:
   m_CullTransparentMesh: 1
 --- !u!4 &543450652453003721 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 3567372462748784376, guid: 03b97b5a4a7888945a1fb613f8dec67a,
+  m_CorrespondingSourceObject: {fileID: 3831885362272980944, guid: 6d4cc166a7a53944398eac55c6a3e79b,
     type: 3}
-  m_PrefabInstance: {fileID: 3894315324426467121}
+  m_PrefabInstance: {fileID: 7204515566972532854}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &919132148262910835 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4236210452198493250, guid: 03b97b5a4a7888945a1fb613f8dec67a,
-    type: 3}
-  m_PrefabInstance: {fileID: 3894315324426467121}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3469287838450019949
+--- !u!114 &3469287838450019949 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 6203454135343398727, guid: 6d4cc166a7a53944398eac55c6a3e79b,
+    type: 3}
+  m_PrefabInstance: {fileID: 7204515566972532854}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148262910835}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a055f794807295741a2db2582be89337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 330585545}
-  shootPoint: {fileID: 925948441}
-  bulletPrefab: {fileID: 6041622384291554358, guid: 3364899af0ec0474f922ac4747a0125b,
-    type: 3}
-  muzzleFlash: {fileID: 911300227}
-  shootForce: 60
-  shootDelay: 1
---- !u!114 &3469287838450019952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148262910835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3df5c76698944304d974ed5348e7b47c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 330585545}
-  defaultRotation: {x: -98.27, y: -10.9, z: -10.78}
-  recoil: {x: -100, y: 2, z: 7}
-  kickbackZ: 1.15
-  returnAmount: 13
-  snappiness: 7
---- !u!1001 &3894315324426467121
+--- !u!1001 &7204515566972532854
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -7270,117 +7375,81 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1481359581}
     m_Modifications:
-    - target: {fileID: 3567372462748784376, guid: 03b97b5a4a7888945a1fb613f8dec67a,
+    - target: {fileID: 3831885362272980944, guid: 6d4cc166a7a53944398eac55c6a3e79b,
         type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3567372462748784376, guid: 03b97b5a4a7888945a1fb613f8dec67a,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 3567372462748784376, guid: 03b97b5a4a7888945a1fb613f8dec67a,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 3567372462748784376, guid: 03b97b5a4a7888945a1fb613f8dec67a,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 3567372462748784376, guid: 03b97b5a4a7888945a1fb613f8dec67a,
+    - target: {fileID: 3831885362272980944, guid: 6d4cc166a7a53944398eac55c6a3e79b,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.95
       objectReference: {fileID: 0}
-    - target: {fileID: 3567372462748784376, guid: 03b97b5a4a7888945a1fb613f8dec67a,
+    - target: {fileID: 3831885362272980944, guid: 6d4cc166a7a53944398eac55c6a3e79b,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.75
       objectReference: {fileID: 0}
-    - target: {fileID: 3567372462748784376, guid: 03b97b5a4a7888945a1fb613f8dec67a,
+    - target: {fileID: 3831885362272980944, guid: 6d4cc166a7a53944398eac55c6a3e79b,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 1.066
       objectReference: {fileID: 0}
-    - target: {fileID: 3567372462748784376, guid: 03b97b5a4a7888945a1fb613f8dec67a,
+    - target: {fileID: 3831885362272980944, guid: 6d4cc166a7a53944398eac55c6a3e79b,
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.6416944
       objectReference: {fileID: 0}
-    - target: {fileID: 3567372462748784376, guid: 03b97b5a4a7888945a1fb613f8dec67a,
+    - target: {fileID: 3831885362272980944, guid: 6d4cc166a7a53944398eac55c6a3e79b,
         type: 3}
       propertyPath: m_LocalRotation.x
       value: -0.7436686
       objectReference: {fileID: 0}
-    - target: {fileID: 3567372462748784376, guid: 03b97b5a4a7888945a1fb613f8dec67a,
+    - target: {fileID: 3831885362272980944, guid: 6d4cc166a7a53944398eac55c6a3e79b,
         type: 3}
       propertyPath: m_LocalRotation.y
       value: -0.13258389
       objectReference: {fileID: 0}
-    - target: {fileID: 3567372462748784376, guid: 03b97b5a4a7888945a1fb613f8dec67a,
+    - target: {fileID: 3831885362272980944, guid: 6d4cc166a7a53944398eac55c6a3e79b,
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.13269068
       objectReference: {fileID: 0}
-    - target: {fileID: 3567372462748784376, guid: 03b97b5a4a7888945a1fb613f8dec67a,
+    - target: {fileID: 3831885362272980944, guid: 6d4cc166a7a53944398eac55c6a3e79b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -98.27
       objectReference: {fileID: 0}
-    - target: {fileID: 3567372462748784376, guid: 03b97b5a4a7888945a1fb613f8dec67a,
+    - target: {fileID: 3831885362272980944, guid: 6d4cc166a7a53944398eac55c6a3e79b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -10.9
       objectReference: {fileID: 0}
-    - target: {fileID: 3567372462748784376, guid: 03b97b5a4a7888945a1fb613f8dec67a,
+    - target: {fileID: 3831885362272980944, guid: 6d4cc166a7a53944398eac55c6a3e79b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -10.78
       objectReference: {fileID: 0}
-    - target: {fileID: 3567372462748784376, guid: 03b97b5a4a7888945a1fb613f8dec67a,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4236210452198493250, guid: 03b97b5a4a7888945a1fb613f8dec67a,
+    - target: {fileID: 4496360184393536874, guid: 6d4cc166a7a53944398eac55c6a3e79b,
         type: 3}
       propertyPath: m_Name
       value: Pistol Cannon
       objectReference: {fileID: 0}
-    - target: {fileID: 4236210452198493250, guid: 03b97b5a4a7888945a1fb613f8dec67a,
+    - target: {fileID: 6203454135343398727, guid: 6d4cc166a7a53944398eac55c6a3e79b,
         type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4236210452198493250, guid: 03b97b5a4a7888945a1fb613f8dec67a,
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 330585545}
+    - target: {fileID: 7106721991188799373, guid: 6d4cc166a7a53944398eac55c6a3e79b,
         type: 3}
-      propertyPath: m_TagString
-      value: Gun
-      objectReference: {fileID: 0}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 330585545}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 3567372462748784376, guid: 03b97b5a4a7888945a1fb613f8dec67a,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1530949148}
-    - targetCorrespondingSourceObject: {fileID: 3567372462748784376, guid: 03b97b5a4a7888945a1fb613f8dec67a,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 925948441}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4236210452198493250, guid: 03b97b5a4a7888945a1fb613f8dec67a,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3469287838450019949}
-    - targetCorrespondingSourceObject: {fileID: 4236210452198493250, guid: 03b97b5a4a7888945a1fb613f8dec67a,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3469287838450019952}
-  m_SourcePrefab: {fileID: 100100000, guid: 03b97b5a4a7888945a1fb613f8dec67a, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6d4cc166a7a53944398eac55c6a3e79b, type: 3}
 --- !u!4 &8868167645717320909 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8868167645725338488, guid: 0ff62ce7e7ca8cd4c94b7418d698ff56,

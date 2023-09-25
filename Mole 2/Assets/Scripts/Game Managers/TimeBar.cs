@@ -56,10 +56,11 @@ public class TimeBar : MonoBehaviour
         }
 
         gameOverGroup.alpha = 1;
-        stopGame();
+        GameOverFinished();
     }
 
-    private void stopGame() 
+    // When the game over screen is fully shown; different from stopping the game 
+    private void GameOverFinished() 
     {
         playButton.interactable = true;
         Time.timeScale = 0f;

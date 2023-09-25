@@ -10,8 +10,16 @@ public class GameOver : MonoBehaviour
     public CanvasGroup canvasGroup;
     public Button playButton;
     public UnityEvent onPlayAgain;
-    public void playAgainButton()
+
+    public void PlayAgainButton()
     {
+
+        var existingBullets = GameObject.FindGameObjectsWithTag("Projectile");
+        foreach(GameObject bullet in existingBullets) 
+        {
+            Destroy(bullet);
+        }
+
         playButton.interactable = false;
         Time.timeScale = 1f;
         canvasGroup.alpha = 0f;

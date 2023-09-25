@@ -16,7 +16,7 @@ public class MoleManager : MonoBehaviour
             mole.gameObject.SetActive(false);
         }
 
-        genRandMole();
+        GenRandMole();
     }
 
     void Awake()
@@ -32,7 +32,7 @@ public class MoleManager : MonoBehaviour
         
     }
 
-    public void genRandMole()
+    public void GenRandMole()
     {
         int moleNum = 0;
         
@@ -46,10 +46,10 @@ public class MoleManager : MonoBehaviour
         lastMole = moleNum;
     }
 
-    public void cleanBoard()
+    public void CleanBoard()
     {
         molesArray[lastMole].gameObject.SetActive(false);
-        genRandMole();
+        GenRandMole();
     } 
 
 }

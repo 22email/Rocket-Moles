@@ -9,7 +9,15 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] private LayerMask mask;
     [SerializeField] private Camera cam;
     [SerializeField] private Animator hammerAnimator;
+    
     private PlayerUI playerUI; 
+    private bool canInteract = true;
+
+    public bool CanInteract
+    {
+        get{return canInteract;}
+        set{canInteract = value;}
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +28,9 @@ public class PlayerInteract : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerUI.updateText(string.Empty);
+        if(!canInteract) return;
+
+        playerUI.UpdateText(string.Empty);
 
         Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
@@ -33,7 +43,7 @@ public class PlayerInteract : MonoBehaviour
             {
                 Interactable interactable = hit.collider.gameObject.GetComponent<Interactable>();
 
-                playerUI.updateText(interactable.promptMessage);    
+                playerUI.UpdateText(interactable.promptMessage);    
 
                 if(Input.GetKeyDown(interactKey))
                 {

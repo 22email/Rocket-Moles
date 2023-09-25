@@ -13,7 +13,13 @@ public class CameraController : MonoBehaviour
 
     private float camX;
     private float camY; 
-    [HideInInspector] public bool canMoveMouse;
+    
+    private bool canMoveMouse;
+    public bool CanMoveMouse
+    {
+        get { return canMoveMouse; }
+        set { canMoveMouse = value; }
+    }
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
