@@ -18,6 +18,10 @@ public class PauseMenu : MonoBehaviour
         set { canPause = value; }
     }
 
+    private bool canUnPause = true;
+
+    public bool CanUnPause {get => canPause; set => canUnPause = value;}
+
     private Button[] childButtons;
 
     // Start is called before the first frame update
@@ -33,7 +37,10 @@ public class PauseMenu : MonoBehaviour
         {
             if(!isPaused) Pause();
 
-            else Resume();
+            else {
+                if (canUnPause) Resume();
+            }
+            
         }
     }
 
@@ -46,10 +53,10 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        foreach(Button b in childButtons) 
-        {
-            b.interactable = true;
-        } 
+        // foreach(Button b in childButtons) 
+        // {
+        //     b.interactable = true;
+        // } 
 
     }
 
@@ -63,9 +70,9 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false; 
 
-        foreach(Button b in childButtons) 
-        {
-            b.interactable = false;
-        }
+        // foreach(Button b in childButtons) 
+        // {
+        //     b.interactable = false;
+        // }
     }
 }
