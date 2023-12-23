@@ -3368,7 +3368,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 304608789}
         m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
-        m_MethodName: startMouseMovement
+        m_MethodName: allowLook
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4107,7 +4107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17aaa3dad0a3e6a4389a22321fe25911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameTime: 60
+  gameTime: 10
   bar: {fileID: 2020581241}
   gameOverGroup: {fileID: 780576748}
   playButton: {fileID: 724543796}
@@ -4116,7 +4116,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 304608789}
         m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
-        m_MethodName: stopMouseMovement
+        m_MethodName: disallowLook
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
