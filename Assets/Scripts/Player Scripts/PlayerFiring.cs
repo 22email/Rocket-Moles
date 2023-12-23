@@ -1,54 +1,57 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CannonFiring : MonoBehaviour
+public class PlayerFiring : MonoBehaviour
 {
-    public Camera cam;
     public Transform shootPoint;
     public GameObject bulletPrefab;
     public ParticleSystem muzzleFlash;
-    [SerializeField] private float shootForce;
-    [SerializeField] private float shootDelay;
+
+    [SerializeField]
+    private float shootForce;
+
+    [SerializeField]
+    private float shootDelay;
     private Vector3 destination;
-    private bool canShoot;
 
     private GunRecoil gunRecoil;
 
-    public bool CanShoot
+    private bool canFire;
+
+    public bool CanFire
     {
-        get { return canShoot; }
-        set { canShoot = value; }
+        get => canFire;
+        set => canFire = value;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        canShoot = true;
-        gunRecoil = GetComponent<GunRecoil>();
+        canFire = true;
+        gunRecoil = GameObject.FindGameObjectWithTag("Gun").GetComponent<GunRecoil>();
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && canShoot)
+        if (Input.GetButtonDown("Fire1") && canFire)
         {
-            canShoot = false;
-            shootProj();
+            canFire = false;
+            shootProjectile();
 
             Invoke(nameof(ResetShoot), shootDelay);
         }
     }
 
-    private void shootProj()
+    private void ResetShoot() => canFire = true;
+
+    private void shootProjectile()
     {
         muzzleFlash.Play();
         gunRecoil.DoRecoil();
 
-        Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
 
         if (Physics.Raycast(ray, out RaycastHit hit))
             destination = hit.point;
-
         else
             destination = ray.GetPoint(1000);
 
@@ -60,13 +63,6 @@ public class CannonFiring : MonoBehaviour
         bullet.GetComponent<Rigidbody>().velocity = shootDirection.normalized * shootForce;
 
         Destroy(bullet, 2f);
-
-
-    }
-
-    private void ResetShoot()
-    {
-        canShoot = true;
     }
 
 }

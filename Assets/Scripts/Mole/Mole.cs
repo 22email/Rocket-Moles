@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,7 +13,7 @@ public class Mole : Interactable
     void Start()
     {
         onWhack.AddListener(GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>().UpdateScore);
-        moleManager = GameObject.FindGameObjectWithTag("MoleManager").GetComponent<MoleManager>();
+        moleManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<MoleManager>();
     }
 
     void OnEnable()

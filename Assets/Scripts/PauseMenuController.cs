@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenuController : MonoBehaviour
 {
     public UnityEvent onPause;
     public UnityEvent onResume;
@@ -12,19 +12,18 @@ public class PauseMenu : MonoBehaviour
 
     // Used to prevent pausing while in the game over screen
     private bool canPause = true;
+
     public bool CanPause
     {
-        get { return canPause; }
-        set { canPause = value; }
+        get => canPause;
+        set => canPause = value;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && canPause)
-        {
             Pause();
-        }
     }
 
     public void Pause()

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 // This is mostly for the in-game settings menu & pause menu interactions
-public class SettingsMenu : MonoBehaviour
+public class SettingsController : MonoBehaviour
 {
 
 }

@@ -10,6 +10,7 @@ TagManager:
   - ScoreManager
   - MoleIndicator
   - Gun
+  - PauseMenu
   layers:
   - Default
   - TransparentFX

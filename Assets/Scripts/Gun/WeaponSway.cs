@@ -1,17 +1,34 @@
-// From https://youtu.be/QIVN-T-1QBE 
-
-using System.Collections;
-using System.Collections.Generic;
+// From https://youtu.be/QIVN-T-1QBE
 using UnityEngine;
 
 public class WeaponSway : MonoBehaviour
 {
-    [SerializeField] private float multiplier;
-    [SerializeField] private float smooth;
+    [SerializeField]
+    private float multiplier;
+
+    [SerializeField]
+    private float smooth;
+
+    private bool canSway;
+
+    public bool CanSway
+    {
+        get => canSway;
+        set => canSway = value;
+    }
+
+    void Awake()
+    {
+        // TODO: Retrive this value from a saved JSON file
+        canSway = true;
+    }
 
     // Update is called once per frame
     void Update()
     {
+        if (!canSway)
+            return;
+
         float mouseX = Input.GetAxisRaw("Mouse X") * multiplier;
         float mouseY = Input.GetAxisRaw("Mouse Y") * multiplier;
 
@@ -20,8 +37,10 @@ public class WeaponSway : MonoBehaviour
 
         Quaternion targetRotation = rotationX * rotationY;
 
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, smooth * Time.deltaTime);
-
-
+        transform.localRotation = Quaternion.Slerp(
+            transform.localRotation,
+            targetRotation,
+            smooth * Time.deltaTime
+        );
     }
 }
