@@ -1,17 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class PlayerUI : MonoBehaviour
 {
     public TextMeshProUGUI promptText;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    void Start() { }
 
     public void UpdateText(string promptMessage)
     {

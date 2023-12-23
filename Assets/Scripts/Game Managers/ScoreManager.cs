@@ -1,25 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
-    [HideInInspector] public TextMeshProUGUI scoreText; 
+    private TextMeshProUGUI scoreText; 
     public TextMeshProUGUI gameOverScoreText; 
-    [HideInInspector] public float score; // moles clicked
+    private float score; // moles clicked
 
-    // Start is called before the first frame update
     void Start()
     {
         score = 0;
         scoreText = GetComponent<TextMeshProUGUI>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void UpdateScore()

@@ -5,37 +5,42 @@ using UnityEngine;
 public class ProjectileCollision : MonoBehaviour
 {
     private bool collided;
-    public GameObject explosion; 
+    public GameObject explosion;
     public float explosionForce;
     public float explosionRadius;
 
-   void OnCollisionEnter(Collision co) 
-   {
-        if(co.gameObject.tag != "Bullet" && co.gameObject.tag != "Player" && co.gameObject.tag != "Gun" && !collided)
+    void OnCollisionEnter(Collision co)
+    {
+        if (!co.gameObject.CompareTag("Projectile") &&
+            !co.gameObject.CompareTag("Player") &&
+            !co.gameObject.CompareTag("Gun") &&
+            !collided)
         {
             GameObject explosionObj = Instantiate(explosion, co.contacts[0].point, Quaternion.identity);
-            collided = true; 
+            collided = true;
 
-            doExplosionForce();
+            DoExplosionForce();
 
             Destroy(explosionObj, 2f);
             Destroy(gameObject);
         }
-   }
+    }
 
-   void doExplosionForce()
-   {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+    void DoExplosionForce()
+    {
+        Collider[] colliders = new Collider[10];
+        
+        // The amount of colliders that exist within the explosion radius
+        var count = Physics.OverlapSphereNonAlloc(transform.position, explosionRadius, colliders);
 
-        foreach(Collider c in colliders)
+        foreach (Collider c in colliders)
         {
-            Rigidbody colliderRb = c.GetComponent<Rigidbody>();
-
-            if(colliderRb != null)
-            {   
+            
+            if (c != null && c.TryGetComponent<Rigidbody>(out var colliderRb))
+            {
                 colliderRb.AddExplosionForce(explosionForce, transform.position, explosionRadius, 1f, ForceMode.Impulse);
             }
 
         }
-   }
+    }
 }

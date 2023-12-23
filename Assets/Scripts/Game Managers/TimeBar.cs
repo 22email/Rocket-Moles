@@ -21,12 +21,6 @@ public class TimeBar : MonoBehaviour
         StartCoroutine(animateTimeBar()); 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void resetBar()
     {
         barRectTransform.localScale = new Vector3(1, 1, 1);

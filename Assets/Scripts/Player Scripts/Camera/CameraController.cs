@@ -1,62 +1,44 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField]
+    private float mouseSens;
 
-    [SerializeField] private float mouseSens;
-
-    public Transform player;  
+    public Transform player;
 
     private float camX;
-    private float camY; 
-    
-    private bool canMoveMouse;
-    public bool CanMoveMouse
-    {
-        get { return canMoveMouse; }
-        set { canMoveMouse = value; }
-    }
+    private float camY;
+
+    private bool canLook;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false; 
-        canMoveMouse = true;
     }
 
     void LateUpdate()
     {
-        if (canMoveMouse)
-        {
-            float mouseX = Input.GetAxisRaw("Mouse X") * mouseSens * 0.02f;
-            float mouseY = Input.GetAxisRaw("Mouse Y") * mouseSens * 0.02f;
+        if (Cursor.lockState == CursorLockMode.Confined) return;
 
-            camX -= mouseY;
-            camY += mouseX;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSens * 0.02f;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSens * 0.02f;
 
-            camX = Mathf.Clamp(camX, -90f, 90f);
+        camX -= mouseY;
+        camY += mouseX;
 
-            transform.rotation = Quaternion.Euler(camX, camY, 0);
-            player.rotation = Quaternion.Euler(0, camY, 0); 
-        }
-        
+        camX = Mathf.Clamp(camX, -90f, 90f);
+
+        transform.rotation = Quaternion.Euler(camX, camY, 0);
+        player.rotation = Quaternion.Euler(0, camY, 0);
     }
 
-    public void stopMouseMovement()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true; 
-        canMoveMouse = false;
-    }
+    // Methods used by events
+    
+    // Make the player inable to look around but allows free mouse movement
+    public void disallowLook() => Cursor.lockState = CursorLockMode.Confined;// Cursor.visible = true;// canLook = false;
 
-    public void startMouseMovement()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false; 
-        canMoveMouse = true;
-    }
-
+    // Make the player able to look around
+    public void allowLook() => Cursor.lockState = CursorLockMode.Locked;// Cursor.visible = false;// canLook = true;
 }

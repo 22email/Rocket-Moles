@@ -20,12 +20,7 @@ public class WeaponBobbing : MonoBehaviour
         playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
         
     } 
-
-    void Awake()
-    {
-        
-    }
-
+    
     // Update is called once per frame
     void Update()
     {

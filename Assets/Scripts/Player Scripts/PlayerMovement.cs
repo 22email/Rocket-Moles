@@ -1,4 +1,4 @@
-// This and other movement-related scripts from https://youtu.be/f473C43s8nE 
+// This and other movement-related scripts from https://youtu.be/f473C43s8nE
 
 using System.Collections;
 using System.Collections.Generic;
@@ -7,22 +7,34 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private Transform orientation;
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float groundDrag;
-    [SerializeField] private float airMultiplier;
-    [SerializeField] private float jumpCooldown;
+    [SerializeField]
+    private Transform orientation;
+
+    [SerializeField]
+    private float moveSpeed;
+
+    [SerializeField]
+    private float groundDrag;
+
+    [SerializeField]
+    private float airMultiplier;
+
+    [SerializeField]
+    private float jumpCooldown;
 
     [Header("Jumping")]
-    [SerializeField] private float jumpForce;
+    [SerializeField]
+    private float jumpForce;
     private bool wishJump;
     private bool canJump;
 
     [Header("Keybinds")]
-    [SerializeField] private KeyCode jumpKey = KeyCode.Space;
+    [SerializeField]
+    private KeyCode jumpKey = KeyCode.Space;
 
     [Header("Ground Check")]
-    [SerializeField] private LayerMask whatIsGround;
+    [SerializeField]
+    private LayerMask whatIsGround;
 
     private bool grounded;
     public bool Grounded
@@ -32,11 +44,15 @@ public class PlayerMovement : MonoBehaviour
     }
 
     [Header("Slopes")]
-    [SerializeField] private float maxSlope;
-    [SerializeField] private float playerHeight = 2f;
+    [SerializeField]
+    private float maxSlope;
+
+    [SerializeField]
+    private float playerHeight = 2f;
 
     [Header("Teleporting")]
-    [SerializeField] private float lowestPoint = -5f;
+    [SerializeField]
+    private float lowestPoint = -5f;
     private RaycastHit slopeHit;
 
     private float xInput;
@@ -57,7 +73,12 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         // ground check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
+        grounded = Physics.Raycast(
+            transform.position,
+            Vector3.down,
+            playerHeight * 0.5f + 0.3f,
+            whatIsGround
+        );
 
         GetInput();
         SpeedControl();
@@ -65,10 +86,8 @@ public class PlayerMovement : MonoBehaviour
         // handle drag
         if (grounded)
             rb.drag = groundDrag;
-
         else if (onSlope())
             rb.drag = groundDrag;
-
         else
             rb.drag = 0f;
 
@@ -112,7 +131,6 @@ public class PlayerMovement : MonoBehaviour
             // Immediately resets the jump boolean
             // Mostly for slope handling
             Invoke(nameof(ResetJumpCooldown), jumpCooldown);
-
         }
     }
 
@@ -128,14 +146,15 @@ public class PlayerMovement : MonoBehaviour
             if (rb.velocity.y > 0)
                 rb.velocity = new Vector3(rb.velocity.x, -2f, rb.velocity.z);
         }
-
         // on ground
         else if (grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Acceleration);
-
         // in air
         else if (!grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Acceleration);
+            rb.AddForce(
+                moveDirection.normalized * moveSpeed * 10f * airMultiplier,
+                ForceMode.Acceleration
+            );
 
         rb.useGravity = !onSlope();
     }
@@ -143,7 +162,6 @@ public class PlayerMovement : MonoBehaviour
     // Handle speed control
     private void SpeedControl()
     {
-
         if (onSlope() && canJump)
         {
             if (rb.velocity.magnitude > moveSpeed)
@@ -151,7 +169,6 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = rb.velocity.normalized * moveSpeed;
             }
         }
-
         else
         {
             Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
@@ -163,7 +180,6 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
             }
         }
-
     }
 
     // Jump
@@ -179,7 +195,14 @@ public class PlayerMovement : MonoBehaviour
 
     private bool onSlope()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
+        if (
+            Physics.Raycast(
+                transform.position,
+                Vector3.down,
+                out slopeHit,
+                playerHeight * 0.5f + 0.3f
+            )
+        )
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle < maxSlope && angle != 0;
@@ -192,5 +215,4 @@ public class PlayerMovement : MonoBehaviour
     {
         return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
-
 }

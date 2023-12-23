@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CannonFiring : MonoBehaviour
 {
-    public Camera cam; 
+    public Camera cam;
     public Transform shootPoint;
-    public  GameObject bulletPrefab;
+    public GameObject bulletPrefab;
     public ParticleSystem muzzleFlash;
     [SerializeField] private float shootForce;
     [SerializeField] private float shootDelay;
@@ -17,8 +17,8 @@ public class CannonFiring : MonoBehaviour
 
     public bool CanShoot
     {
-        get{return canShoot;}
-        set{canShoot = value;}
+        get { return canShoot; }
+        set { canShoot = value; }
     }
 
     // Start is called before the first frame update
@@ -28,29 +28,27 @@ public class CannonFiring : MonoBehaviour
         gunRecoil = GetComponent<GunRecoil>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Fire1") && canShoot)
+        if (Input.GetButtonDown("Fire1") && canShoot)
         {
             canShoot = false;
-            shootProj();  
+            shootProj();
 
-            Invoke("resetShoot", shootDelay);
+            Invoke(nameof(ResetShoot), shootDelay);
         }
     }
 
-    private void shootProj() 
+    private void shootProj()
     {
         muzzleFlash.Play();
-        gunRecoil.doRecoil();
+        gunRecoil.DoRecoil();
 
         Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit hit;
 
-        if(Physics.Raycast(ray, out hit)) 
-            destination = hit.point;    
-        
+        if (Physics.Raycast(ray, out RaycastHit hit))
+            destination = hit.point;
+
         else
             destination = ray.GetPoint(1000);
 
@@ -63,10 +61,10 @@ public class CannonFiring : MonoBehaviour
 
         Destroy(bullet, 2f);
 
-        
+
     }
 
-    private void resetShoot()
+    private void ResetShoot()
     {
         canShoot = true;
     }

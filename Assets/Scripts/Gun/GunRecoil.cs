@@ -32,19 +32,27 @@ public class GunRecoil : MonoBehaviour
 
     void Update()
     {
+        // By default, always try to lerp to the start rotation & position
         targetRotation = Vector3.Lerp(targetRotation, defaultRotation, Time.deltaTime * returnAmount);
         currentRotation = Vector3.Slerp(currentRotation, targetRotation, Time.deltaTime * snappiness);
+
         transform.localRotation = Quaternion.Euler(currentRotation);
 
         targetPosition = Vector3.Lerp(targetPosition, initialGunPosition, Time.deltaTime * returnAmount);
         currentPosition = Vector3.Lerp(currentPosition, targetPosition, Time.deltaTime * snappiness);
+        
         transform.localPosition = currentPosition; 
         
     }
 
-    public void doRecoil()
+    // Changes the target position
+    // However, code in Update() lerps back to it's default position & rotation
+    // Smooth recoil as a result
+    public void DoRecoil()
     {
+        // Change position of the gun due to recoil
         targetPosition -= new Vector3(0, 0, kickbackZ);
+
         targetRotation += new Vector3(recoil.x, Random.Range(-recoil.y, recoil.y), Random.Range(-recoil.z, recoil.z));
     }
 }

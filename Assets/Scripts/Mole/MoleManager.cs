@@ -26,12 +26,6 @@ public class MoleManager : MonoBehaviour
         lastMole = 1;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void GenRandMole()
     {
         int moleNum = 0;
@@ -39,7 +33,7 @@ public class MoleManager : MonoBehaviour
         do 
         {
             moleNum = Random.Range(0, molesArray.Length);
-        }while(moleNum == lastMole);
+        } while(moleNum == lastMole);
 
         molesArray[moleNum].gameObject.SetActive(true);
 

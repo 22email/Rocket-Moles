@@ -18,12 +18,6 @@ public class Mole : Interactable
         moleManager = GameObject.FindGameObjectWithTag("MoleManager").GetComponent<MoleManager>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void OnEnable()
     {
         StartCoroutine(change());
