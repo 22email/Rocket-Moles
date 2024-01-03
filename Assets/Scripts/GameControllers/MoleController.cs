@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoleManager : MonoBehaviour
+public class MoleController: MonoBehaviour
 {
     public Mole[] molesArray;
 

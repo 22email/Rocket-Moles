@@ -20,7 +20,8 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
-        if (Cursor.lockState == CursorLockMode.Confined) return;
+        if (Cursor.lockState == CursorLockMode.Confined)
+            return;
 
         float mouseX = Input.GetAxis("Mouse X") * mouseSens * 0.02f;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSens * 0.02f;
@@ -35,10 +36,10 @@ public class CameraController : MonoBehaviour
     }
 
     // Methods used by events
-    
+
     // Make the player inable to look around but allows free mouse movement
-    public void disallowLook() => Cursor.lockState = CursorLockMode.Confined;// Cursor.visible = true;// canLook = false;
+    public void disallowLook() => Cursor.lockState = CursorLockMode.Confined; // Cursor.visible = true;// canLook = false;
 
     // Make the player able to look around
-    public void allowLook() => Cursor.lockState = CursorLockMode.Locked;// Cursor.visible = false;// canLook = true;
+    public void allowLook() => Cursor.lockState = CursorLockMode.Locked; // Cursor.visible = false;// canLook = true;
 }

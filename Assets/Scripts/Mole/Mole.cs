@@ -7,13 +7,15 @@ public class Mole : Interactable
     public GameObject whackParticle;
     public ParticleSystem byeSpeechBubble;
     public UnityEvent onWhack;
-    private MoleManager moleManager;
+    private MoleController moleController;
+    [SerializeField]
+    private AudioSource hitSound;
 
     // Start is called before the first frame update
     void Start()
     {
-        onWhack.AddListener(GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>().UpdateScore);
-        moleManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<MoleManager>();
+        onWhack.AddListener(GameObject.FindGameObjectWithTag("GameController").GetComponent<ScoreController>().IncreaseScore);
+        moleController = GameObject.FindGameObjectWithTag("GameController").GetComponent<MoleController>();
     }
 
     void OnEnable()
@@ -31,9 +33,12 @@ public class Mole : Interactable
         GameObject whackObj = Instantiate(whackParticle, transform.position, Quaternion.identity);
         gameObject.SetActive(false);
 
+        hitSound.pitch = Random.Range(0.8f, 1f);
+        hitSound.Play();
+
         Destroy(whackObj, 2f);
 
-        moleManager.GenRandMole();
+        moleController.GenRandMole();
         onWhack.Invoke();
     }
 
@@ -41,7 +46,7 @@ public class Mole : Interactable
     {
         yield return new WaitForSeconds(5);
         gameObject.SetActive(false);
-        moleManager.GenRandMole();
+        moleController.GenRandMole();
         byeSpeechBubble.Play();
     }
 }

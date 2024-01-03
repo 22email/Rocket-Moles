@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class GameLoopController : MonoBehaviour
 {
@@ -11,22 +9,43 @@ public class GameLoopController : MonoBehaviour
 
     public GameObject timeBar;
     public CanvasGroup gameOverGroup;
+
     private RectTransform barRectTransform;
+
     public UnityEvent stopGameEvent;
+    public UnityEvent restartGameEvent;
+
+    private GameObject player;
+
+    void Awake()
+    {
+        Application.targetFrameRate = -1;
+    }
 
     void Start()
     {
         barRectTransform = timeBar.GetComponent<RectTransform>();
-        StartCoroutine(AnimateTimeBar());
+        StartCoroutine(StartGameLoop());
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    public void ResetBar()
+    public void RestartGame()
     {
+        // Destroy all bullets
+        var existingBullets = GameObject.FindGameObjectsWithTag("Projectile");
+        foreach (GameObject bullet in existingBullets)
+        {
+            Destroy(bullet);
+        }
+
         barRectTransform.localScale = new Vector3(1, 1, 1);
-        StartCoroutine(AnimateTimeBar());
+        StartCoroutine(StartGameLoop());
+        restartGameEvent.Invoke();
+        Time.timeScale = 1f;
     }
 
-    public IEnumerator AnimateTimeBar()
+    // Also controls the time bar animation
+    private IEnumerator StartGameLoop()
     {
         for (float t = 0.0f; t < 1f; t += Time.deltaTime / gameTime)
         {
@@ -36,29 +55,28 @@ public class GameLoopController : MonoBehaviour
 
         barRectTransform.localScale = new Vector3(0, 1, 1);
 
-        // Invokes the related methods to stopping the game
+        // Invokes the related methods (in the event) to stopping the game
         stopGameEvent.Invoke();
-
         StartCoroutine(ShowGameOverAnimation());
+        Time.timeScale = 0f;
     }
 
     // Displays the fade-in animation for the game over message
-    public IEnumerator ShowGameOverAnimation()
+    private IEnumerator ShowGameOverAnimation()
     {
-        for (float t = 0.0f; t < 1f; t += Time.deltaTime / 0.8f)
+        for (float t = 0.0f; t < 1f; t += Time.fixedDeltaTime / 0.8f)
         {
             gameOverGroup.alpha = Mathf.Lerp(0, 1, t);
             yield return null;
         }
 
         gameOverGroup.alpha = 1;
-        GameOverFinished();
+        GameOverAnimationFinished();
     }
 
     // When the game over screen is fully shown
-    private void GameOverFinished()
+    private void GameOverAnimationFinished()
     {
-        Time.timeScale = 0f;
         StopAllCoroutines();
     }
 }

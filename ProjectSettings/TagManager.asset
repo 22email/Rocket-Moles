@@ -11,6 +11,7 @@ TagManager:
   - MoleIndicator
   - Gun
   - PauseMenu
+  - User
   layers:
   - Default
   - TransparentFX

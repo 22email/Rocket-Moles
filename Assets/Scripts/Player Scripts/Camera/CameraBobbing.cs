@@ -73,7 +73,7 @@ public class CameraBobbing : MonoBehaviour
     void Move(GameObject objToMove, float a, float b)
     {
         if(!playerMovement.Grounded) return;
-        if(new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z).magnitude < threshhold) return;
+        if(new Vector3(playerRb.velocity.x, 0f, playerRb.velocity.z).sqrMagnitude< threshhold * threshhold) return;
 
         Vector3 pos = Vector3.zero;
 
