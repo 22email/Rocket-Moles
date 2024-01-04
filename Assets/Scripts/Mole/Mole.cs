@@ -1,3 +1,4 @@
+// Sounds from mixkit & pixaby
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,14 +9,31 @@ public class Mole : Interactable
     public ParticleSystem byeSpeechBubble;
     public UnityEvent onWhack;
     private MoleController moleController;
+
+    [Header("Audio")]
     [SerializeField]
     private AudioSource hitSound;
+
+    [SerializeField]
+    private GameObject screamSourcesParent;
+
+    private AudioSource[] screamSources;
+
+    private bool screamingEnabled = true; // TODO --Put this in user settings
 
     // Start is called before the first frame update
     void Start()
     {
-        onWhack.AddListener(GameObject.FindGameObjectWithTag("GameController").GetComponent<ScoreController>().IncreaseScore);
-        moleController = GameObject.FindGameObjectWithTag("GameController").GetComponent<MoleController>();
+        onWhack.AddListener(
+            GameObject
+                .FindGameObjectWithTag("GameController")
+                .GetComponent<ScoreController>()
+                .IncreaseScore
+        );
+        moleController = GameObject
+            .FindGameObjectWithTag("GameController")
+            .GetComponent<MoleController>();
+        screamSources = screamSourcesParent.GetComponents<AudioSource>();
     }
 
     void OnEnable()
@@ -35,6 +53,9 @@ public class Mole : Interactable
 
         hitSound.pitch = Random.Range(0.8f, 1f);
         hitSound.Play();
+
+        if (screamingEnabled)
+            screamSources[Random.Range(0, screamSources.Length)].Play();
 
         Destroy(whackObj, 2f);
 

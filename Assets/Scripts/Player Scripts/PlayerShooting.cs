@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerFiring : MonoBehaviour
+public class PlayerShooting : MonoBehaviour
 {
     public Transform shootPoint;
     public GameObject bulletPrefab;
@@ -11,37 +11,41 @@ public class PlayerFiring : MonoBehaviour
 
     [SerializeField]
     private float shootDelay;
+
+    [SerializeField]
+    private AudioSource shootSound;
+
     private Vector3 destination;
-
     private GunRecoil gunRecoil;
+    private bool canShoot;
 
-    private bool canFire;
-
-    public bool CanFire
+    public bool CanShoot
     {
-        get => canFire;
-        set => canFire = value;
+        get => canShoot;
+        set => canShoot = value;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        canFire = true;
+        canShoot = true;
         gunRecoil = GameObject.FindGameObjectWithTag("Gun").GetComponent<GunRecoil>();
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && canFire)
+        if (Input.GetButtonDown("Fire1") && canShoot)
         {
-            canFire = false;
+            canShoot = false;
             shootProjectile();
 
+            shootSound.pitch = Random.Range(0.8f, 1f);
+            shootSound.Play();
             Invoke(nameof(ResetShoot), shootDelay);
         }
     }
 
-    private void ResetShoot() => canFire = true;
+    private void ResetShoot() => canShoot = true;
 
     private void shootProjectile()
     {

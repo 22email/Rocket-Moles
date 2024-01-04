@@ -23,6 +23,9 @@ public class ProjectileCollision : MonoBehaviour
                 co.contacts[0].point,
                 Quaternion.identity
             );
+
+            var audioSource = explosionObj.GetComponent<AudioSource>();
+            audioSource.pitch = Random.Range(0.8f, 1f);
             collided = true;
 
             DoExplosionForce();
@@ -46,7 +49,11 @@ public class ProjectileCollision : MonoBehaviour
                 if (colliderRb.TryGetComponent<PlayerMovement>(out var pm))
                 {
                     pm.MoveToSlope = false;
-                    pm.StartCoroutine(pm.ResetMoveToSlope());
+                    pm.MoveSpeed = pm.DefaultMoveSpeed * 5.2f;
+
+                    pm.StopAllCoroutines();
+                    pm.StartCoroutine(pm.SlowDown());
+                    pm.StartCoroutine(pm.FallToGround());
                 }
 
                 colliderRb.AddExplosionForce(

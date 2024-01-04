@@ -1,6 +1,5 @@
 // This and other movement-related scripts from https://youtu.be/f473C43s8nE
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -11,6 +10,24 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     private float moveSpeed;
+    public float MoveSpeed
+    {
+        get => moveSpeed;
+        set => moveSpeed = value;
+    }
+
+    private float defaultMoveSpeed;
+    public float DefaultMoveSpeed
+    {
+        get => defaultMoveSpeed;
+    }
+
+    private bool doSpeedControl = true;
+    public bool DoSpeedControl
+    {
+        get => doSpeedControl;
+        set => doSpeedControl = value;
+    }
 
     [SerializeField]
     private float groundDrag;
@@ -60,19 +77,24 @@ public class PlayerMovement : MonoBehaviour
     [Header("Audio")]
     [SerializeField]
     private AudioSource footsteps;
+
     [SerializeField]
     private AudioSource jumpSound;
+
+    [SerializeField]
+    private AudioSource fallSound;
 
     private float xInput;
     private float zInput;
     private Vector3 moveDirection;
 
-    private Rigidbody rb;
+    public Rigidbody Rb { get; set; }
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
+        Rb = GetComponent<Rigidbody>();
+        Rb.freezeRotation = true;
+        defaultMoveSpeed = moveSpeed;
     }
 
     private void Update()
@@ -99,24 +121,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        MovePlayer();
-
-        // handle drag
-        if (grounded)
-            rb.drag = groundDrag;
-        else
-            rb.drag = 0f;
-
-        if (transform.position.y <= lowestPoint)
-        {
-            ResetPosition();
-        }
-
-        SpeedControl();
-    }
-
     private void GetInput()
     {
         // Jump buffering
@@ -137,10 +141,30 @@ public class PlayerMovement : MonoBehaviour
         // Calculates the movement direction given the player's orientation and input on the X (A & D) and Z (W & S) axis
         xInput = Input.GetAxisRaw("Horizontal");
         zInput = Input.GetAxisRaw("Vertical");
+        
         // Multiply the forward vector with the Z axis since it represents moving backing and forth
         // Multiply the rightward vector with the X axis since it represents moving right and left
         // Keep in mind that right is positive
         moveDirection = orientation.forward * zInput + orientation.right * xInput;
+    }
+
+    private void FixedUpdate()
+    {
+        MovePlayer();
+
+        // Handle drag
+        if (grounded)
+            Rb.drag = groundDrag;
+        else
+            Rb.drag = 0f;
+
+        // Reset spawnpoint when player dies
+        if (transform.position.y <= lowestPoint)
+        {
+            ResetPosition();
+        }
+
+        SpeedControl();
     }
 
     private void MovePlayer()
@@ -149,54 +173,64 @@ public class PlayerMovement : MonoBehaviour
 
         if (OnSlope())
         {
-            rb.AddForce(GetSlopeDirection() * moveSpeed * 10f, ForceMode.Acceleration);
-            if (rb.velocity.y > 0 && moveToSlope)
+            Rb.AddForce(GetSlopeDirection() * moveSpeed * 10f, ForceMode.Acceleration);
+
+            if (Rb.velocity.y > 0 && moveToSlope)
             {
-                rb.velocity = GetSlopeDirection() * rb.velocity.magnitude;
+                Rb.velocity = GetSlopeDirection() * Rb.velocity.magnitude;
             }
         }
         else if (grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Acceleration);
-        // in air
-        else if (!grounded)
-            rb.AddForce(
+            Rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Acceleration);
+        else 
+            Rb.AddForce(
                 moveDirection.normalized * moveSpeed * 10f * airMultiplier,
                 ForceMode.Acceleration
             );
 
-        rb.useGravity = !OnSlope();
+        // Prevents the player from sliding off slopes
+        Rb.useGravity = !OnSlope();
+    }
+
+    private void Jump()
+    {
+        // Don't adjust velocity to slope's direction
+        moveToSlope = false;
+
+        Rb.velocity = new Vector3(Rb.velocity.x, 0, Rb.velocity.z);
+        Rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+        jumpSound.pitch = Random.Range(0.8f, 1f);
+        jumpSound.Play();
+
+        StartCoroutine(FallToGround());
     }
 
     public void ResetPosition()
     {
         transform.position = new Vector3(0, 2, 0);
-        rb.velocity = Vector3.zero;
+        Rb.velocity = Vector3.zero;
 
+        // This is required otherwise the code won't work half of the time
         Physics.SyncTransforms();
     }
 
-    // Jump
-    private void Jump()
-    {
-        // rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
-        moveToSlope = false;
-
-        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        jumpSound.pitch = Random.Range(0.8f, 1f);
-        jumpSound.Play();
-
-        StartCoroutine(ResetMoveToSlope());
-    }
-
     // Resets the move to slope variable when the player is grounded again
-    public IEnumerator ResetMoveToSlope()
+    public IEnumerator FallToGround()
     {
+        // A delay before waiting until the player is grounded again
+        // Prevents the code from detecting when the player
+        yield return new WaitForSeconds(0.3f);
+
         // Wait until the player is grounded
         yield return new WaitUntil(() => grounded);
 
-        // Add a small delay (this doesn't feel right)
-        yield return new WaitForSeconds(0.1f);
+        // Play a sound:
+        fallSound.pitch = Random.Range(0.8f, 1f);
+        fallSound.Play();
+
+        // Add a small delay in case
+        // yield return new WaitForSeconds(0.1f);
         moveToSlope = true;
     }
 
@@ -206,22 +240,36 @@ public class PlayerMovement : MonoBehaviour
     {
         if (OnSlope())
         {
-            if (rb.velocity.sqrMagnitude > moveSpeed * moveSpeed)
+            if (Rb.velocity.sqrMagnitude > moveSpeed * moveSpeed)
             {
-                rb.velocity = rb.velocity.normalized * moveSpeed;
+                Rb.velocity = Rb.velocity.normalized * moveSpeed;
             }
         }
         else
         {
-            Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            Vector3 flatVel = new Vector3(Rb.velocity.x, 0f, Rb.velocity.z);
 
             // Limit velocity if needed
-            if (flatVel.sqrMagnitude > moveSpeed * moveSpeed)
+            if (flatVel.magnitude > moveSpeed)
             {
                 Vector3 limitedVel = flatVel.normalized * moveSpeed;
-                rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+                Rb.velocity = new Vector3(limitedVel.x, Rb.velocity.y, limitedVel.z);
             }
         }
+    }
+
+    // Unrealistc but fun deacceleration
+    // This coroutine is started in the ProjectileCollision class
+    // -- Since the player needs to speed up when hit by a projectile, but also must slow down
+    public IEnumerator SlowDown()
+    {
+        for (float t = 0.0f; t < 1f; t += Time.deltaTime / 7.0f)
+        {
+            moveSpeed = Mathf.Lerp(moveSpeed, defaultMoveSpeed, t);
+            yield return null;
+        }
+
+        moveSpeed = defaultMoveSpeed;
     }
 
     private bool OnSlope()
@@ -242,8 +290,6 @@ public class PlayerMovement : MonoBehaviour
         return false;
     }
 
-    private Vector3 GetSlopeDirection()
-    {
-        return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
-    }
+    private Vector3 GetSlopeDirection() =>
+        Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
 }
