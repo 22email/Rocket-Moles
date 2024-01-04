@@ -4,7 +4,7 @@
 
 - Whack moles to increase your score
 - Whack as many moles in the given time frame
-- More moles = More happiness!
+- More moles = More happiness! (Nah)
 
 ## Notes
 
