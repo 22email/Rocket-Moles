@@ -804,8 +804,8 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  maxSlope: 40
   playerHeight: 2
+  maxSlope: 40
   lowestPoint: -5
   footsteps: {fileID: 703587810}
   jumpSound: {fileID: 148929299}
@@ -1680,7 +1680,7 @@ Transform:
   m_GameObject: {fileID: 304608786}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5999999, z: 0}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2335,7 +2335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 418179888}
   m_Layer: 5
-  m_Name: Game UI
+  m_Name: GameUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7516,6 +7516,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1960338530}
+  - component: {fileID: 1960338531}
   m_Layer: 0
   m_Name: User
   m_TagString: Untagged
@@ -7538,6 +7539,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1939523206}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1960338531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960338529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 012e37056a99a31539041c9d738d2a8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2002185742
 GameObject:
   m_ObjectHideFlags: 0
@@ -7727,24 +7740,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2459116914677087245, guid: 553e4b33798e56b4c853d75ae913ca30,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2459116914677087245, guid: 553e4b33798e56b4c853d75ae913ca30,
-        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1165480922}
-    - target: {fileID: 2459116914677087245, guid: 553e4b33798e56b4c853d75ae913ca30,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2459116914677087245, guid: 553e4b33798e56b4c853d75ae913ca30,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2898971096780610301, guid: 553e4b33798e56b4c853d75ae913ca30,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -7769,18 +7767,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6052811973341802459, guid: 553e4b33798e56b4c853d75ae913ca30,
-        type: 3}
-      propertyPath: m_text
-      value: 'Camera Shake
-
-'
-      objectReference: {fileID: 0}
-    - target: {fileID: 6458074226936543631, guid: 553e4b33798e56b4c853d75ae913ca30,
-        type: 3}
-      propertyPath: m_Name
-      value: Toggle Camera Shake
       objectReference: {fileID: 0}
     - target: {fileID: 6691162421819538834, guid: 553e4b33798e56b4c853d75ae913ca30,
         type: 3}
@@ -7811,11 +7797,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732101228626310215, guid: 553e4b33798e56b4c853d75ae913ca30,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7732101228626310215, guid: 553e4b33798e56b4c853d75ae913ca30,
         type: 3}

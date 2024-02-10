@@ -57,7 +57,7 @@ public class PlayerInteract : MonoBehaviour
 
                 if (Input.GetKeyDown(interactKey))
                 {
-                    interactable.baseInteract();
+                    interactable.BaseInteract();
                     hammerAnimator.Play("HammerSwing", 0);
                 }
             }

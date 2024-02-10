@@ -46,7 +46,7 @@ public class Mole : Interactable
         StopAllCoroutines();
     }
 
-    public override void interact()
+    public override void Interact()
     {
         GameObject whackObj = Instantiate(whackParticle, transform.position, Quaternion.identity);
         gameObject.SetActive(false);

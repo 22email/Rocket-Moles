@@ -10,7 +10,7 @@ public class GameLoopController : MonoBehaviour
     public GameObject timeBar;
     public CanvasGroup gameOverGroup;
 
-    private RectTransform barRectTransform;
+    private RectTransform barRt;
 
     public UnityEvent stopGameEvent;
     public UnityEvent restartGameEvent;
@@ -24,7 +24,7 @@ public class GameLoopController : MonoBehaviour
 
     void Start()
     {
-        barRectTransform = timeBar.GetComponent<RectTransform>();
+        barRt = timeBar.GetComponent<RectTransform>();
         StartCoroutine(StartGameLoop());
         player = GameObject.FindGameObjectWithTag("Player");
     }
@@ -38,7 +38,7 @@ public class GameLoopController : MonoBehaviour
             Destroy(bullet);
         }
 
-        barRectTransform.localScale = new Vector3(1, 1, 1);
+        barRt.localScale = new Vector3(1, 1, 1);
         StartCoroutine(StartGameLoop());
         restartGameEvent.Invoke();
         Time.timeScale = 1f;
@@ -49,11 +49,11 @@ public class GameLoopController : MonoBehaviour
     {
         for (float t = 0.0f; t < 1f; t += Time.deltaTime / gameTime)
         {
-            barRectTransform.localScale = new Vector3(Mathf.Lerp(1, 0, t), 1, 1);
+            barRt.localScale = new Vector3(Mathf.Lerp(1, 0, t), 1, 1);
             yield return null;
         }
 
-        barRectTransform.localScale = new Vector3(0, 1, 1);
+        barRt.localScale = new Vector3(0, 1, 1);
 
         // Invokes the related methods (in the event) to stopping the game
         stopGameEvent.Invoke();

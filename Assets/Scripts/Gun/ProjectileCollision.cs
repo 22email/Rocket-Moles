@@ -1,22 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjectileCollision : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject explosion;
+
+    [SerializeField]
+    private float explosionForce = 7f;
+
+    [SerializeField]
+    private float explosionRadius = 10f;
+
     private bool collided;
-    public GameObject explosion;
-    public float explosionForce;
-    public float explosionRadius;
 
     void OnCollisionEnter(Collision co)
     {
-        if (
-            !co.gameObject.CompareTag("Projectile")
-            && !co.gameObject.CompareTag("Player")
-            && !co.gameObject.CompareTag("Gun")
-            && !collided
-        )
+        if (!co.gameObject.CompareTag("Projectile") && !collided)
         {
             GameObject explosionObj = Instantiate(
                 explosion,
@@ -24,12 +23,13 @@ public class ProjectileCollision : MonoBehaviour
                 Quaternion.identity
             );
 
-            var audioSource = explosionObj.GetComponent<AudioSource>();
-            audioSource.pitch = Random.Range(0.8f, 1f);
+            // Don't need to call Play() since the source plays on awake
+            AudioSource explosionSound = explosionObj.GetComponent<AudioSource>();
+            explosionSound.pitch = Random.Range(0.8f, 1f);
+
             collided = true;
 
             DoExplosionForce();
-
             Destroy(explosionObj, 2f);
             Destroy(gameObject);
         }
@@ -46,10 +46,13 @@ public class ProjectileCollision : MonoBehaviour
         {
             if (c != null && c.TryGetComponent<Rigidbody>(out var colliderRb))
             {
-                if (colliderRb.TryGetComponent<PlayerMovement>(out var pm))
+                if (
+                    colliderRb.TryGetComponent<PlayerMovement>(out var pm)
+                    && (pm.transform.position - transform.position).sqrMagnitude < 15
+                )
                 {
                     pm.MoveToSlope = false;
-                    pm.MoveSpeed = pm.DefaultMoveSpeed * 5.2f;
+                    pm.MoveSpeed = pm.DefaultMoveSpeed * 8f;
 
                     pm.StopAllCoroutines();
                     pm.StartCoroutine(pm.SlowDown());

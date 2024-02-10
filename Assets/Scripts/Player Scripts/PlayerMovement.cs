@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     [SerializeField]
     private Transform orientation;
+    private float slowDownTime = 2.5f;
 
     [SerializeField]
     private float moveSpeed;
@@ -48,6 +49,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private LayerMask whatIsGround;
 
+    [SerializeField]
+    private float playerHeight = 2f;
+
     private bool grounded;
     public bool Grounded
     {
@@ -65,9 +69,6 @@ public class PlayerMovement : MonoBehaviour
         get => moveToSlope;
         set => moveToSlope = value;
     }
-
-    [SerializeField]
-    private float playerHeight = 2f;
 
     [Header("Teleporting")]
     [SerializeField]
@@ -99,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        // ground check
+        // If the player is on a slope it also means they're grounded
         grounded =
             Physics.Raycast(
                 transform.position,
@@ -138,10 +139,9 @@ public class PlayerMovement : MonoBehaviour
             wishJump = false;
         }
 
-        // Calculates the movement direction given the player's orientation and input on the X (A & D) and Z (W & S) axis
         xInput = Input.GetAxisRaw("Horizontal");
         zInput = Input.GetAxisRaw("Vertical");
-        
+
         // Multiply the forward vector with the Z axis since it represents moving backing and forth
         // Multiply the rightward vector with the X axis since it represents moving right and left
         // Keep in mind that right is positive
@@ -169,8 +169,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        // calculate movement direction
-
+        // Calculate movement direction
         if (OnSlope())
         {
             Rb.AddForce(GetSlopeDirection() * moveSpeed * 10f, ForceMode.Acceleration);
@@ -182,7 +181,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (grounded)
             Rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Acceleration);
-        else 
+        else
             Rb.AddForce(
                 moveDirection.normalized * moveSpeed * 10f * airMultiplier,
                 ForceMode.Acceleration
@@ -195,6 +194,7 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         // Don't adjust velocity to slope's direction
+        // Otherwise player stays glued to slope
         moveToSlope = false;
 
         Rb.velocity = new Vector3(Rb.velocity.x, 0, Rb.velocity.z);
@@ -228,9 +228,6 @@ public class PlayerMovement : MonoBehaviour
         // Play a sound:
         fallSound.pitch = Random.Range(0.8f, 1f);
         fallSound.Play();
-
-        // Add a small delay in case
-        // yield return new WaitForSeconds(0.1f);
         moveToSlope = true;
     }
 
@@ -263,7 +260,7 @@ public class PlayerMovement : MonoBehaviour
     // -- Since the player needs to speed up when hit by a projectile, but also must slow down
     public IEnumerator SlowDown()
     {
-        for (float t = 0.0f; t < 1f; t += Time.deltaTime / 7.0f)
+        for (float t = 0.0f; t < 1f; t += Time.deltaTime / slowDownTime)
         {
             moveSpeed = Mathf.Lerp(moveSpeed, defaultMoveSpeed, t);
             yield return null;
