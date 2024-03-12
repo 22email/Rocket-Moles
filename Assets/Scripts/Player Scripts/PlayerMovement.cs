@@ -89,12 +89,12 @@ public class PlayerMovement : MonoBehaviour
     private float zInput;
     private Vector3 moveDirection;
 
-    public Rigidbody Rb { get; set; }
+    public Rigidbody rb { get; set; }
 
     private void Start()
     {
-        Rb = GetComponent<Rigidbody>();
-        Rb.freezeRotation = true;
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
         defaultMoveSpeed = moveSpeed;
     }
 
@@ -154,9 +154,9 @@ public class PlayerMovement : MonoBehaviour
 
         // Handle drag
         if (grounded)
-            Rb.drag = groundDrag;
+            rb.drag = groundDrag;
         else
-            Rb.drag = 0f;
+            rb.drag = 0f;
 
         // Reset spawnpoint when player dies
         if (transform.position.y <= lowestPoint)
@@ -172,23 +172,23 @@ public class PlayerMovement : MonoBehaviour
         // Calculate movement direction
         if (OnSlope())
         {
-            Rb.AddForce(GetSlopeDirection() * moveSpeed * 10f, ForceMode.Acceleration);
+            rb.AddForce(GetSlopeDirection() * moveSpeed * 10f, ForceMode.Acceleration);
 
-            if (Rb.velocity.y > 0 && moveToSlope)
+            if (rb.velocity.y > 0 && moveToSlope)
             {
-                Rb.velocity = GetSlopeDirection() * Rb.velocity.magnitude;
+                rb.velocity = GetSlopeDirection() * rb.velocity.magnitude;
             }
         }
         else if (grounded)
-            Rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Acceleration);
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Acceleration);
         else
-            Rb.AddForce(
+            rb.AddForce(
                 moveDirection.normalized * moveSpeed * 10f * airMultiplier,
                 ForceMode.Acceleration
             );
 
         // Prevents the player from sliding off slopes
-        Rb.useGravity = !OnSlope();
+        rb.useGravity = !OnSlope();
     }
 
     private void Jump()
@@ -197,8 +197,8 @@ public class PlayerMovement : MonoBehaviour
         // Otherwise player stays glued to slope
         moveToSlope = false;
 
-        Rb.velocity = new Vector3(Rb.velocity.x, 0, Rb.velocity.z);
-        Rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
         jumpSound.pitch = Random.Range(0.8f, 1f);
         jumpSound.Play();
@@ -209,7 +209,7 @@ public class PlayerMovement : MonoBehaviour
     public void ResetPosition()
     {
         transform.position = new Vector3(0, 2, 0);
-        Rb.velocity = Vector3.zero;
+        rb.velocity = Vector3.zero;
 
         // This is required otherwise the code won't work half of the time
         Physics.SyncTransforms();
@@ -237,20 +237,20 @@ public class PlayerMovement : MonoBehaviour
     {
         if (OnSlope())
         {
-            if (Rb.velocity.sqrMagnitude > moveSpeed * moveSpeed)
+            if (rb.velocity.sqrMagnitude > moveSpeed * moveSpeed)
             {
-                Rb.velocity = Rb.velocity.normalized * moveSpeed;
+                rb.velocity = rb.velocity.normalized * moveSpeed;
             }
         }
         else
         {
-            Vector3 flatVel = new Vector3(Rb.velocity.x, 0f, Rb.velocity.z);
+            Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
             // Limit velocity if needed
             if (flatVel.magnitude > moveSpeed)
             {
                 Vector3 limitedVel = flatVel.normalized * moveSpeed;
-                Rb.velocity = new Vector3(limitedVel.x, Rb.velocity.y, limitedVel.z);
+                rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
             }
         }
     }
