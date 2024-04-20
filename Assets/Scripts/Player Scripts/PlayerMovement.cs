@@ -172,7 +172,7 @@ public class PlayerMovement : MonoBehaviour
         // Calculate movement direction
         if (OnSlope())
         {
-            rb.AddForce(GetSlopeDirection() * moveSpeed * 10f, ForceMode.Acceleration);
+            rb.AddForce(10f * moveSpeed * GetSlopeDirection(), ForceMode.Acceleration);
 
             if (rb.velocity.y > 0 && moveToSlope)
             {
@@ -180,10 +180,10 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         else if (grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Acceleration);
+            rb.AddForce(10f * moveSpeed * moveDirection.normalized, ForceMode.Acceleration);
         else
             rb.AddForce(
-                moveDirection.normalized * moveSpeed * 10f * airMultiplier,
+                10f * airMultiplier * moveSpeed * moveDirection.normalized,
                 ForceMode.Acceleration
             );
 
@@ -219,7 +219,7 @@ public class PlayerMovement : MonoBehaviour
     public IEnumerator FallToGround()
     {
         // A delay before waiting until the player is grounded again
-        // Prevents the code from detecting when the player
+        // Prevents the code from detecting a grounded state when the player just jumped
         yield return new WaitForSeconds(0.3f);
 
         // Wait until the player is grounded
@@ -244,7 +244,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            Vector3 flatVel = new(rb.velocity.x, 0f, rb.velocity.z);
 
             // Limit velocity if needed
             if (flatVel.magnitude > moveSpeed)

@@ -4901,7 +4901,7 @@ GameObject:
   - component: {fileID: 6178262903114301574}
   - component: {fileID: 2640388039542725624}
   m_Layer: 0
-  m_Name: Gun Projectile
+  m_Name: Projectile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

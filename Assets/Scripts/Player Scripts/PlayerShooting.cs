@@ -15,7 +15,7 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField]
     private AudioSource shootSound;
 
-    private Vector3 destination;
+
     private GunRecoil gunRecoil;
     private bool canShoot;
 
@@ -53,6 +53,7 @@ public class PlayerShooting : MonoBehaviour
         gunRecoil.DoRecoil();
 
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        Vector3 destination;
 
         if (Physics.Raycast(ray, out RaycastHit hit))
             destination = hit.point;
