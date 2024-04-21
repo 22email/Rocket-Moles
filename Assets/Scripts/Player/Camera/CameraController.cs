@@ -38,8 +38,8 @@ public class CameraController : MonoBehaviour
     // Methods used by events
 
     // Make the player inable to look around but allows free mouse movement
-    public void disallowLook() => Cursor.lockState = CursorLockMode.Confined; // Cursor.visible = true;// canLook = false;
+    public void DisallowLook() => Cursor.lockState = CursorLockMode.Confined; // Cursor.visible = true;// canLook = false;
 
     // Make the player able to look around
-    public void allowLook() => Cursor.lockState = CursorLockMode.Locked; // Cursor.visible = false;// canLook = true;
+    public void AllowLook() => Cursor.lockState = CursorLockMode.Locked; // Cursor.visible = false;// canLook = true;
 }

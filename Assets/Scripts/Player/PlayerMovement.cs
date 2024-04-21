@@ -63,13 +63,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float maxSlope;
 
-    private bool moveToSlope = true;
-    public bool MoveToSlope
-    {
-        get => moveToSlope;
-        set => moveToSlope = value;
-    }
-
     [Header("Teleporting")]
     [SerializeField]
     private float lowestPoint = -5f;
@@ -142,9 +135,6 @@ public class PlayerMovement : MonoBehaviour
         xInput = Input.GetAxisRaw("Horizontal");
         zInput = Input.GetAxisRaw("Vertical");
 
-        // Multiply the forward vector with the Z axis since it represents moving backing and forth
-        // Multiply the rightward vector with the X axis since it represents moving right and left
-        // Keep in mind that right is positive
         moveDirection = orientation.forward * zInput + orientation.right * xInput;
     }
 
@@ -172,12 +162,8 @@ public class PlayerMovement : MonoBehaviour
         // Calculate movement direction
         if (OnSlope())
         {
-            rb.AddForce(10f * moveSpeed * GetSlopeDirection(), ForceMode.Acceleration);
-
-            if (rb.velocity.y > 0 && moveToSlope)
-            {
-                rb.velocity = GetSlopeDirection() * rb.velocity.magnitude;
-            }
+            Vector3 slopeDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
+            rb.AddForce(10f * moveSpeed * slopeDirection, ForceMode.Acceleration);
         }
         else if (grounded)
             rb.AddForce(10f * moveSpeed * moveDirection.normalized, ForceMode.Acceleration);
@@ -193,10 +179,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        // Don't adjust velocity to slope's direction
-        // Otherwise player stays glued to slope
-        moveToSlope = false;
-
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
@@ -211,7 +193,7 @@ public class PlayerMovement : MonoBehaviour
         transform.position = new Vector3(0, 2, 0);
         rb.velocity = Vector3.zero;
 
-        // This is required otherwise the code won't work half of the time
+        // Sync the transforms; This is required otherwise the code won't work half of the time
         Physics.SyncTransforms();
     }
 
@@ -228,7 +210,6 @@ public class PlayerMovement : MonoBehaviour
         // Play a sound:
         fallSound.pitch = Random.Range(0.8f, 1f);
         fallSound.Play();
-        moveToSlope = true;
     }
 
     // Limits the speed of the player to the moveSpeed variable
@@ -247,26 +228,12 @@ public class PlayerMovement : MonoBehaviour
             Vector3 flatVel = new(rb.velocity.x, 0f, rb.velocity.z);
 
             // Limit velocity if needed
-            if (flatVel.magnitude > moveSpeed)
+            if (flatVel.sqrMagnitude > moveSpeed * moveSpeed)
             {
                 Vector3 limitedVel = flatVel.normalized * moveSpeed;
                 rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
             }
         }
-    }
-
-    // Unrealistc but fun deacceleration
-    // This coroutine is started in the ProjectileCollision class
-    // -- Since the player needs to speed up when hit by a projectile, but also must slow down
-    public IEnumerator SlowDown()
-    {
-        for (float t = 0.0f; t < 1f; t += Time.deltaTime / slowDownTime)
-        {
-            moveSpeed = Mathf.Lerp(moveSpeed, defaultMoveSpeed, t);
-            yield return null;
-        }
-
-        moveSpeed = defaultMoveSpeed;
     }
 
     private bool OnSlope()
@@ -287,6 +254,18 @@ public class PlayerMovement : MonoBehaviour
         return false;
     }
 
-    private Vector3 GetSlopeDirection() =>
-        Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
+
+    // Unrealistc but fun deacceleration
+    // This coroutine is started in the ProjectileCollision class
+    // -- Since the player needs to speed up when hit by a projectile, but also must slow down
+    public IEnumerator SlowDown()
+    {
+        for (float t = 0.0f; t < 1f; t += Time.deltaTime / slowDownTime)
+        {
+            moveSpeed = Mathf.Lerp(moveSpeed, defaultMoveSpeed, t);
+            yield return null;
+        }
+
+        moveSpeed = defaultMoveSpeed;
+    }
 }

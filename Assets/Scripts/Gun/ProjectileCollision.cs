@@ -13,7 +13,7 @@ public class ProjectileCollision : MonoBehaviour
 
     private bool collided;
 
-    void OnCollisionEnter(Collision co)
+    void OnCollisionStay(Collision co)
     {
         if (!co.gameObject.CompareTag("Projectile") && !collided)
         {
@@ -51,7 +51,6 @@ public class ProjectileCollision : MonoBehaviour
                     && (pm.transform.position - transform.position).sqrMagnitude < 15
                 )
                 {
-                    pm.MoveToSlope = false;
                     pm.MoveSpeed = pm.DefaultMoveSpeed * 8f;
 
                     pm.StopAllCoroutines();

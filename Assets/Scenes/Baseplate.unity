@@ -194,12 +194,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!20 &69718739
 Camera:
   m_ObjectHideFlags: 0
@@ -291,7 +291,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 451869256}
 --- !u!33 &105672040
@@ -358,14 +358,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Shape:
     rid: 8074469316847992833
-  m_Size: {x: -17.15, y: 2.36, z: -29.74}
+  m_Size: {x: 20, y: 6, z: 10}
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
   m_PivotLocation: 0
   m_PivotPosition: {x: 0, y: 0, z: 0}
-  m_UnmodifiedMeshVersion: 6664
+  m_UnmodifiedMeshVersion: 7834
   m_ShapeBox:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 8.575, y: 1.18, z: 14.87}
+    m_Extent: {x: 10, y: 3, z: 5}
   references:
     version: 2
     RefIds:
@@ -480,60 +480,60 @@ MonoBehaviour:
   - m_Vertices: 080000000a00000010000000
   m_SharedTextures: []
   m_Positions:
-  - {x: 8.575, y: -1.18, z: 14.87}
-  - {x: -8.575, y: -1.18, z: 14.87}
-  - {x: 0, y: 1.18, z: 14.87}
-  - {x: -8.575, y: -1.18, z: 14.87}
-  - {x: -8.575, y: -1.18, z: -14.87}
-  - {x: 0, y: 1.18, z: 14.87}
-  - {x: 0, y: 1.18, z: -14.87}
-  - {x: -8.575, y: -1.18, z: -14.87}
-  - {x: 8.575, y: -1.18, z: -14.87}
-  - {x: 0, y: 1.18, z: -14.87}
-  - {x: 8.575, y: -1.18, z: -14.87}
-  - {x: 8.575, y: -1.18, z: 14.87}
-  - {x: 0, y: 1.18, z: -14.87}
-  - {x: 0, y: 1.18, z: 14.87}
-  - {x: 8.575, y: -1.18, z: 14.87}
-  - {x: -8.575, y: -1.18, z: 14.87}
-  - {x: 8.575, y: -1.18, z: -14.87}
-  - {x: -8.575, y: -1.18, z: -14.87}
+  - {x: -10, y: -3, z: -5}
+  - {x: 10, y: -3, z: -5}
+  - {x: 0, y: 3, z: -5}
+  - {x: 10, y: -3, z: -5}
+  - {x: 10, y: -3, z: 5}
+  - {x: 0, y: 3, z: -5}
+  - {x: 0, y: 3, z: 5}
+  - {x: 10, y: -3, z: 5}
+  - {x: -10, y: -3, z: 5}
+  - {x: 0, y: 3, z: 5}
+  - {x: -10, y: -3, z: 5}
+  - {x: -10, y: -3, z: -5}
+  - {x: 0, y: 3, z: 5}
+  - {x: 0, y: 3, z: -5}
+  - {x: -10, y: -3, z: -5}
+  - {x: 10, y: -3, z: -5}
+  - {x: -10, y: -3, z: 5}
+  - {x: 10, y: -3, z: 5}
   m_Textures0:
-  - {x: -8.575, y: -1.18}
-  - {x: 8.575, y: -1.18}
-  - {x: 0, y: 1.18}
-  - {x: -8.580715, y: 14.87}
-  - {x: -8.580715, y: -14.87}
-  - {x: 0.31311592, y: 14.87}
-  - {x: 0.31311592, y: -14.87}
-  - {x: -8.575, y: -1.18}
-  - {x: 8.575, y: -1.18}
-  - {x: 0, y: 1.18}
-  - {x: 8.580715, y: -14.87}
-  - {x: 8.580715, y: 14.87}
-  - {x: -0.31311592, y: -14.87}
-  - {x: -0.31311592, y: 14.87}
-  - {x: -8.575, y: 14.87}
-  - {x: 8.575, y: 14.87}
-  - {x: -8.575, y: -14.87}
-  - {x: 8.575, y: -14.87}
+  - {x: -10, y: -3}
+  - {x: 10, y: -3}
+  - {x: 0, y: 3}
+  - {x: 10.118417, y: -5}
+  - {x: 10.118417, y: 5}
+  - {x: -1.5434872, y: -5}
+  - {x: -1.5434872, y: 5}
+  - {x: -10, y: -3}
+  - {x: 10, y: -3}
+  - {x: 0, y: 3}
+  - {x: -10.118417, y: 5}
+  - {x: -10.118417, y: -5}
+  - {x: 1.5434872, y: 5}
+  - {x: 1.5434872, y: -5}
+  - {x: 10, y: -5}
+  - {x: -10, y: -5}
+  - {x: 10, y: 5}
+  - {x: -10, y: 5}
   m_Textures2: []
   m_Textures3: []
   m_Tangents:
-  - {x: -1, y: 0, z: 0, w: -1}
-  - {x: -1, y: 0, z: 0, w: -1}
-  - {x: -1, y: 0, z: 0, w: -1}
-  - {x: 0.9641515, y: 0.2653525, z: 0, w: -1}
-  - {x: 0.9641515, y: 0.2653525, z: 0, w: -1}
-  - {x: 0.9641515, y: 0.2653525, z: 0, w: -1}
-  - {x: 0.9641515, y: 0.2653525, z: 0, w: -1}
   - {x: 1, y: 0, z: 0, w: -1}
   - {x: 1, y: 0, z: 0, w: -1}
   - {x: 1, y: 0, z: 0, w: -1}
-  - {x: 0.9641515, y: -0.2653525, z: 0, w: -1}
-  - {x: 0.9641515, y: -0.2653525, z: 0, w: -1}
-  - {x: 0.9641515, y: -0.2653525, z: 0, w: -1}
-  - {x: 0.9641515, y: -0.2653525, z: 0, w: -1}
+  - {x: 0.8574929, y: -0.51449573, z: 0, w: -1}
+  - {x: 0.8574929, y: -0.51449573, z: 0, w: -1}
+  - {x: 0.8574929, y: -0.51449573, z: 0, w: -1}
+  - {x: 0.8574929, y: -0.51449573, z: 0, w: -1}
+  - {x: -1, y: 0, z: 0, w: -1}
+  - {x: -1, y: 0, z: 0, w: -1}
+  - {x: -1, y: 0, z: 0, w: -1}
+  - {x: 0.8574929, y: 0.51449573, z: 0, w: -1}
+  - {x: 0.8574929, y: 0.51449573, z: 0, w: -1}
+  - {x: 0.8574929, y: 0.51449573, z: 0, w: -1}
+  - {x: 0.8574929, y: 0.51449573, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
   - {x: -1, y: 0, z: 0, w: -1}
@@ -547,7 +547,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 451869256}
-  m_VersionIndex: 6664
+  m_VersionIndex: 7834
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -836,7 +836,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &148929294
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1828,12 +1828,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!114 &330585548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2454,7 +2454,7 @@ Mesh:
     vertexCount: 18
     localAABB:
       m_Center: {x: 0, y: 0, z: 0}
-      m_Extent: {x: 8.575, y: 1.18, z: 14.87}
+      m_Extent: {x: 10, y: 3, z: 5}
   m_Shapes:
     vertices: []
     shapes: []
@@ -2533,7 +2533,7 @@ Mesh:
       format: 0
       dimension: 0
     m_DataSize: 864
-    _typelessdata: 333309413d0a97bf85eb6d4100000000000000000000803f000080bf0000000000000000000080bf333309c13d0a97bf333309c13d0a97bf85eb6d4100000000000000000000803f000080bf0000000000000000000080bf333309413d0a97bf000000003d0a973f85eb6d4100000000000000000000803f000080bf0000000000000000000080bf000000003d0a973f333309c13d0a97bf85eb6d4148dc87bea2d2763f00000000a2d2763f48dc873e00000000000080bf9c4a09c185eb6d41333309c13d0a97bf85eb6dc148dc87bea2d2763f00000000a2d2763f48dc873e00000000000080bf9c4a09c185eb6dc1000000003d0a973f85eb6d4148dc87bea2d2763f00000000a2d2763f48dc873e00000000000080bfbb50a03e85eb6d41000000003d0a973f85eb6dc148dc87bea2d2763f00000000a2d2763f48dc873e00000000000080bfbb50a03e85eb6dc1333309c13d0a97bf85eb6dc10000000000000000000080bf0000803f0000000000000000000080bf333309c13d0a97bf333309413d0a97bf85eb6dc10000000000000000000080bf0000803f0000000000000000000080bf333309413d0a97bf000000003d0a973f85eb6dc10000000000000000000080bf0000803f0000000000000000000080bf000000003d0a973f333309413d0a97bf85eb6dc148dc873ea2d2763f00000000a2d2763f48dc87be00000000000080bf9c4a094185eb6dc1333309413d0a97bf85eb6d4148dc873ea2d2763f00000000a2d2763f48dc87be00000000000080bf9c4a094185eb6d41000000003d0a973f85eb6dc148dc873ea2d2763f00000000a2d2763f48dc87be00000000000080bfbb50a0be85eb6dc1000000003d0a973f85eb6d4148dc873ea2d2763f00000000a2d2763f48dc87be00000000000080bfbb50a0be85eb6d41333309413d0a97bf85eb6d4100000000000080bf00000000000080bf0000000000000000000080bf333309c185eb6d41333309c13d0a97bf85eb6d4100000000000080bf00000000000080bf0000000000000000000080bf3333094185eb6d41333309413d0a97bf85eb6dc100000000000080bf00000000000080bf0000000000000000000080bf333309c185eb6dc1333309c13d0a97bf85eb6dc100000000000080bf00000000000080bf0000000000000000000080bf3333094185eb6dc1
+    _typelessdata: 000020c1000040c00000a0c00000000000000000000080bf0000803f0000000000000000000080bf000020c1000040c000002041000040c00000a0c00000000000000000000080bf0000803f0000000000000000000080bf00002041000040c000000000000040400000a0c00000000000000000000080bf0000803f0000000000000000000080bf000000000000404000002041000040c00000a0c0feb5033fa8845b3f00000000a8845b3ffeb503bf00000000000080bf09e521410000a0c000002041000040c00000a040feb5033fa8845b3f00000000a8845b3ffeb503bf00000000000080bf09e521410000a04000000000000040400000a0c0feb5033fa8845b3f00000000a8845b3ffeb503bf00000000000080bffd90c5bf0000a0c000000000000040400000a040feb5033fa8845b3f00000000a8845b3ffeb503bf00000000000080bffd90c5bf0000a04000002041000040c00000a04000000000000000000000803f000080bf0000000000000000000080bf000020c1000040c0000020c1000040c00000a04000000000000000000000803f000080bf0000000000000000000080bf00002041000040c000000000000040400000a04000000000000000000000803f000080bf0000000000000000000080bf0000000000004040000020c1000040c00000a040feb503bfa8845b3f00000000a8845b3ffeb5033f00000000000080bf09e521c10000a040000020c1000040c00000a0c0feb503bfa8845b3f00000000a8845b3ffeb5033f00000000000080bf09e521c10000a0c000000000000040400000a040feb503bfa8845b3f00000000a8845b3ffeb5033f00000000000080bffd90c53f0000a04000000000000040400000a0c0feb503bfa8845b3f00000000a8845b3ffeb5033f00000000000080bffd90c53f0000a0c0000020c1000040c00000a0c000000000000080bf00000000000080bf0000000000000000000080bf000020410000a0c000002041000040c00000a0c000000000000080bf00000000000080bf0000000000000000000080bf000020c10000a0c0000020c1000040c00000a04000000000000080bf00000000000080bf0000000000000000000080bf000020410000a04000002041000040c00000a04000000000000080bf00000000000080bf0000000000000000000080bf000020c10000a040
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -2588,7 +2588,7 @@ Mesh:
     m_UVInfo: 0
   m_LocalAABB:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 8.575, y: 1.18, z: 14.87}
+    m_Extent: {x: 10, y: 3, z: 5}
   m_MeshUsageFlags: 0
   m_CookingOptions: 30
   m_BakedConvexCollisionMesh: 
@@ -7001,7 +7001,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 304608789}
         m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
-        m_MethodName: disallowLook
+        m_MethodName: DisallowLook
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7052,7 +7052,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 304608789}
         m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
-        m_MethodName: allowLook
+        m_MethodName: AllowLook
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7159,7 +7159,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 304608789}
         m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
-        m_MethodName: disallowLook
+        m_MethodName: DisallowLook
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7170,8 +7170,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 148929297}
-        m_TargetAssemblyTypeName: PlayerFiring, Assembly-CSharp
-        m_MethodName: set_CanFire
+        m_TargetAssemblyTypeName: PlayerShooting, Assembly-CSharp
+        m_MethodName: set_CanShoot
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7234,7 +7234,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 304608789}
         m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
-        m_MethodName: allowLook
+        m_MethodName: AllowLook
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7245,8 +7245,8 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 148929297}
-        m_TargetAssemblyTypeName: PlayerFiring, Assembly-CSharp
-        m_MethodName: set_CanFire
+        m_TargetAssemblyTypeName: PlayerShooting, Assembly-CSharp
+        m_MethodName: set_CanShoot
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
