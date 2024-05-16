@@ -1,15 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class UserSettings : MonoBehaviour
+[Serializable]
+public class UserSettings
 {
-    // Start is called before the first frame update
-    void Awake() { }
+    private float mouseSensitivity;
+    private float volume;
+    private bool cameraBobbing;
+    private bool cameraShake;
+    private bool screams;
 
-    void Start() { }
-
-    // Update is called once per frame
-    void Update() { }
+    public UserSettings(float mouseSensitivity, float volume, bool cameraBobbing, bool cameraShake, bool screams)
+    {
+        this.mouseSensitivity = mouseSensitivity;
+        this.volume = volume;
+        this.cameraBobbing = cameraBobbing;
+        this.cameraShake = cameraShake;
+        this.screams = screams;
+    }
 }
